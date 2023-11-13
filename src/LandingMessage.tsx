@@ -1,23 +1,23 @@
 import { useState } from "react";
 
+interface Props {
+  heading: string;
+  items: string[];
+}
+
 // PascalCase
-function LandingMessage() {
-  // JSX JavaScript XML
-  const username = "Test User";
-
-  const users = ["User 1", "User 2", "User 3"];
-
+function LandingMessage({ heading, items }: Props) {
   // Hook
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello {username}</h1>
+      <h1 className="text-3xl font-bold underline">Hello {heading}</h1>
 
-      {users.length === 0 && <p>No users found</p>}
+      {items.length === 0 && <p>No users found</p>}
 
       <ul className="max-w-md space-y-1 list-disc list-inside">
-        {users.map((item, idx) => (
+        {items.map((item, idx) => (
           <li
             className={selectedIndex === idx ? "text-red-500" : ""}
             key={idx}
