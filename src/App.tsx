@@ -1,5 +1,6 @@
 import LandingMessage from "./LandingMessage";
 import Alert from "./Alert";
+import Header from "./Header";
 
 function App() {
   const users = ["User 1", "User 2", "User 3"];
@@ -9,7 +10,9 @@ function App() {
   };
 
   return (
-    <div>
+    <>
+      <Header />
+
       <Alert>
         <h1 className="inline">TETETE</h1>
       </Alert>
@@ -19,7 +22,7 @@ function App() {
         items={users}
         onSelectItem={handleSelectItem}
       />
-    </div>
+    </>
   );
 }
 
