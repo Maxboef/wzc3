@@ -3,10 +3,11 @@ import { useState } from "react";
 interface Props {
   heading: string;
   items: string[];
+  onSelectItem: (item: string) => void;
 }
 
 // PascalCase
-function LandingMessage({ heading, items }: Props) {
+function LandingMessage({ heading, items, onSelectItem }: Props) {
   // Hook
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
@@ -21,7 +22,10 @@ function LandingMessage({ heading, items }: Props) {
           <li
             className={selectedIndex === idx ? "text-red-500" : ""}
             key={idx}
-            onClick={() => setSelectedIndex(idx)}
+            onClick={() => {
+              setSelectedIndex(idx);
+              onSelectItem(item);
+            }}
           >
             {item}
           </li>
