@@ -3,28 +3,18 @@ import { useState, useEffect } from "react";
 import { db } from "./firebase-auth";
 import { getDocs, collection } from "firebase/firestore";
 
-type Player = {
-  id: string;
-  name: string;
-  def: number;
-  dri: number;
-  pac: number;
-  pas: number;
-  phy: number;
-  position: string;
-  sho: number;
-  total: number;
-}[];
+import { Player } from "./types/Player";
+import PlayerCard from "./PlayerCard";
 
 function PlayerList() {
-  const [players, setPlayers] = useState<Player>([]);
+  const [players, setPlayers] = useState<Player[]>([]);
   const playersCollectionRef = collection(db, "players");
 
   useEffect(() => {
     const getPlayers = async () => {
       const playersData = await getDocs(playersCollectionRef);
 
-      const data: Player = [];
+      const data: Player[] = [];
 
       playersData.docs.map((player) => {
         const returnData = {
@@ -53,11 +43,9 @@ function PlayerList() {
 
   return (
     <>
-      <ul className="max-w-md space-y-1 list-disc list-inside">
-        {players.map((player, idx) => (
-          <li key={idx}>{player.name}</li>
-        ))}
-      </ul>
+      {players.map((player, idx) => (
+        <PlayerCard key={idx} player={player} />
+      ))}
     </>
   );
 }
