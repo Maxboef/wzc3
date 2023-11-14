@@ -2,7 +2,7 @@ import { Auth, User, signOut } from "firebase/auth";
 
 interface Props {
   auth: Auth;
-  user: User;
+  user: User | null;
 }
 
 function Header({ auth, user }: Props) {
