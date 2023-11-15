@@ -1,49 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "./firebase-auth";
 
 import { User, onAuthStateChanged } from "firebase/auth";
 
-import LandingMessage from "./LandingMessage";
-import Alert from "./Alert";
 import SignInButton from "./SignInButton";
 import Header from "./Header";
 import PlayerList from "./PlayerList";
 
 import "./App.css";
+import { Match } from "./types/Match";
+import MatchView from "./MatchView";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
+  const [upcommingMatches, setUpcommingMatches] = useState<Match[]>([]);
+
+  useEffect(() => {
+    getMatches();
+  }, []);
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
 
-  const users = ["User 1", "User 2", "User 3"];
+  async function getMatches() {
+    const response = await fetch(
+      "https://data.sportlink.com/poule-programma?poulecode=720229&aantaldagen=365&eigenwedstrijden=JA&gebruiklokaleteamgegevens=NEE&client_id=bybEeY5S2Y"
+    );
+    const data = await response.json();
 
-  const handleSelectItem = (item: string) => {
-    console.log(item);
-  };
+    setUpcommingMatches(data);
+  }
+
+  const matchList = upcommingMatches.map((match) => {
+    return <MatchView match={match} />;
+  });
 
   return (
-    <>
-      <Header user={user} auth={auth} />
+    <div className="bg-slate-900">
+      <Header user={user} auth={auth}>
+        {user === null && <SignInButton />}
+      </Header>
 
-      {user && <p>Hi {user.displayName}</p>}
+      {user && <p>{user.displayName}</p>}
 
-      {user === null && <SignInButton />}
+      {matchList}
 
-      <Alert>
-        <h1 className="inline">TETETE</h1>
-      </Alert>
-
-      <LandingMessage
-        heading={"Test"}
-        items={users}
-        onSelectItem={handleSelectItem}
-      />
-
-      {user && <PlayerList />}
-    </>
+      {/* {user && <PlayerList />} */}
+    </div>
   );
 }
 
