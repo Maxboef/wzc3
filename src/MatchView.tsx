@@ -43,7 +43,7 @@ function formatAttendTime(match: Match) {
 function MatchView({ match }: Props) {
   return (
     <div className="m-2 bg-white bg-slate-100 mb-5 rounded">
-      <div className="text-center text-sm font-semibold text-white bg-blue-500 py-0.5 border-b-2 border-blue-400">
+      <div className="bg-blue-500 py-0.5 border-b-2 border-blue-400 text-center text-xs text-white font-black italic uppercase font-roboto">
         {formatDate(match.datum)}
       </div>
 
@@ -53,7 +53,9 @@ function MatchView({ match }: Props) {
             src={formatPath(match.thuisteamclubrelatiecode)}
             className="w-[3rem] m-auto"
           />
-          <span className="text-xs font-semibold">{match.thuisteam}</span>
+          <span className="text-xs font-semibold font-sans">
+            {match.thuisteam}
+          </span>
         </div>
         <div>
           <div className="text-sm font-semibold text-center">

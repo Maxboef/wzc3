@@ -33,6 +33,10 @@ function App() {
       </Header>
 
       {matchList}
+
+      <p className="text-sm text-white tracking-tighter font-black italic uppercase font-roboto">
+        Match
+      </p>
     </div>
   );
 }
