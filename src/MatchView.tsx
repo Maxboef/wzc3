@@ -9,7 +9,6 @@ function formatPath(relationCode: string) {
 }
 
 function formatDate(date: string) {
-  // options for TSX
   const options = {
     weekday: "long" as const,
     year: "numeric" as const,
