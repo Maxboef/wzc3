@@ -1,10 +1,15 @@
 import { Match } from "./types/Match";
+import Logo from "./assets/logo.png";
 
 interface Props {
   match: Match;
 }
 
 function formatPath(relationCode: string) {
+  if (relationCode === "BBKZ50J") {
+    return Logo;
+  }
+
   return "https://logoapi.voetbal.nl/logo.php?clubcode=" + relationCode;
 }
 
@@ -21,7 +26,7 @@ function formatDate(date: string) {
 
 function MatchView({ match }: Props) {
   return (
-    <div className="m-2 bg-white bg-slate-100 mb-5">
+    <div className="m-2 bg-white bg-slate-100 mb-5 rounded">
       <div className="text-center text-sm font-semibold text-white bg-blue-500 py-0.5">
         {formatDate(match.datum)}
       </div>

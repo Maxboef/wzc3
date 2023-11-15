@@ -27,7 +27,7 @@ function App() {
   });
 
   return (
-    <div className="bg-blue">
+    <div className="bg-slate-900">
       <Header>
         <div></div>
       </Header>
