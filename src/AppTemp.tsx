@@ -49,7 +49,7 @@ function App() {
 
       {matchList}
 
-      {/* {user && <PlayerList />} */}
+      {user && <PlayerList />}
     </div>
   );
 }
