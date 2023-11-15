@@ -1,17 +1,29 @@
 import { useEffect, useState } from "react";
+import { auth } from "./firebase-auth";
+
+import { User, onAuthStateChanged } from "firebase/auth";
+
+import SignInButton from "./SignInButton";
+import SignOutButton from "./SignOutButton";
 
 import Header from "./Header";
+import PlayerList from "./PlayerList";
 
 import "./App.css";
 import { Match } from "./types/Match";
 import MatchView from "./MatchView";
 
 function App() {
+  const [user, setUser] = useState<User | null>(null);
   const [upcommingMatches, setUpcommingMatches] = useState<Match[]>([]);
 
   useEffect(() => {
     getMatches();
   }, []);
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
 
   async function getMatches() {
     const response = await fetch(
@@ -29,10 +41,15 @@ function App() {
   return (
     <div className="bg-blue">
       <Header>
-        <div></div>
+        {user === null && <SignInButton />}
+        {user && <SignOutButton />}
       </Header>
 
+      {user && <p>{user.displayName}</p>}
+
       {matchList}
+
+      {/* {user && <PlayerList />} */}
     </div>
   );
 }
