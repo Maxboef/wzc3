@@ -9,11 +9,12 @@ function formatPath(relationCode: string) {
 }
 
 function formatDate(date: string) {
+  // options for TSX
   const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+    weekday: "long" as const,
+    year: "numeric" as const,
+    month: "long" as const,
+    day: "numeric" as const,
   };
 
   return new Date(date).toLocaleDateString("nl-NL", options);
