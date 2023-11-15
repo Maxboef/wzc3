@@ -58,11 +58,15 @@ function MatchView({ match }: Props) {
         <div>
           <div className="text-sm font-semibold text-center">
             <span className="block">
-              <span>Start: </span>
+              <span className="font-normal text-xs w-[4rem] inline-block">
+                Wedstrijd
+              </span>
               {match.aanvangstijd}
             </span>
             <span className="block">
-              <span>Aanvang: </span>
+              <span className="font-normal text-xs w-[4rem] inline-block">
+                Aanvang
+              </span>
               {formatAttendTime(match)}
             </span>
           </div>
