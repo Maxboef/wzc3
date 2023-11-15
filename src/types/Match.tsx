@@ -11,5 +11,6 @@ export declare interface Match {
   uitteamid: string;
   wedstrijd: string;
   wedstrijdcode: number;
+  wedstrijddatum: string;
 }
 [];

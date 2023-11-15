@@ -1,10 +1,24 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+// Ugly way to set the base path
+const router = createBrowserRouter([
+  {
+    path: "/wzc3" + "/",
+    element: <App />,
+  },
+  {
+    path: "/wzc3" + "/test",
+    element: <div>Test</div>,
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <RouterProvider router={router}></RouterProvider>
+  </React.StrictMode>
+);

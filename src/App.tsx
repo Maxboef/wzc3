@@ -27,12 +27,16 @@ function App() {
   });
 
   return (
-    <div className="bg-blue">
+    <div className="bg-slate-900">
       <Header>
         <div></div>
       </Header>
 
       {matchList}
+
+      <p className="text-sm text-white tracking-tighter font-black italic uppercase font-roboto">
+        Match
+      </p>
     </div>
   );
 }
