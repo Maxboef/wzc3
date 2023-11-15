@@ -1,11 +1,10 @@
 .player-card {
     background-color: aliceblue;
-    height: 490px;
+    width: 360px;
     position: relative;
 
     .background {
-        max-width: 375px;
-        position: absolute;
+        width: 100%;
     }
 
     .player-total {
@@ -28,7 +27,7 @@
 
     .player-name {
         position: absolute;
-        bottom: 115px;
+        bottom: 130px;
         left: 50%;
         transform: translateX(-50%);
         font-size: 28px;
@@ -38,13 +37,13 @@
 
     .stats {
         position: absolute;
-        bottom: 50px;
+        bottom: 70px;
         width: 100%;
         left: 50%;
         transform: translateX(-50%);
         display: grid;
         grid-template-columns: repeat(6, 1fr);
-        max-width: 280px;
+        max-width: 270px;
         font-size: 21px;
         font-weight: 600;
         letter-spacing: 0px;

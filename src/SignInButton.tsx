@@ -10,7 +10,7 @@ const OnSignIn = () => {
 function SignInButton() {
   return (
     <button
-      className="border inline px-4 py-2 bg-gray-200 text-black rounded"
+      className="inline px-4 py-1 bg-blue-950 text-white rounded"
       onClick={OnSignIn}
     >
       Sign in
