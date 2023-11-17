@@ -28,6 +28,8 @@ function PlayerList() {
           position: player.data().position,
           sho: player.data().sho,
           total: player.data().total,
+          weak: player.data().weak,
+          skill: player.data().skill,
         };
 
         data.push(returnData);

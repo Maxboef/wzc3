@@ -9,5 +9,7 @@ export declare interface Player {
   position: string;
   sho: number;
   total: number;
+  weak: number;
+  skill: number;
 }
 [];

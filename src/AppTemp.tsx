@@ -45,11 +45,11 @@ function App() {
         {user && <SignOutButton />}
       </Header>
 
+      {user && <PlayerList />}
+
       {user && <p>{user.displayName}</p>}
 
       {matchList}
-
-      {user && <PlayerList />}
     </div>
   );
 }
