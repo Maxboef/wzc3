@@ -12,5 +12,6 @@ export declare interface Player {
   weak: number;
   skill: number;
   image: string;
+  cardType: string;
 }
 [];
