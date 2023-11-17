@@ -31,6 +31,7 @@ function PlayerList() {
           total: player.data().total,
           weak: player.data().weak,
           skill: player.data().skill,
+          image: player.data().image,
         };
 
         data.push(returnData);

@@ -50,18 +50,31 @@ html {
         color: white;
     }
 
+    .player-image {
+        position: absolute;
+        bottom: 36%;
+        left: 55%;
+        width: 215px;
+        transform: translateX(-50%);
+
+      mask: 
+        linear-gradient(to top,  transparent 5%, #fff 10% 90%, transparent 95%),
+        linear-gradient(to left, transparent 5%, #fff 10% 90%, transparent 95%);
+      mask-size: 110% 110%;
+      mask-position: center;
+      mask-repeat:no-repeat;
+      mask-composite: intersect;
+    }
+
     .stats {
         position: absolute;
-        bottom: 70px;
+        bottom: 72px;
         width: 100%;
         left: 50%;
         transform: translateX(-50%);
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         max-width: 270px;
-        font-size: 20px;
-        font-weight: 600;
-        letter-spacing: 0px;
         color: #3f200c;
         font-family: 'Roboto', sans-serif;
         text-transform: uppercase;
@@ -70,7 +83,20 @@ html {
         .stat {
             display: grid;
             grid-template-columns: 1fr;
+            grid-template-rows: 20px 1fr;
             text-align: center;
+        }
+
+        .label {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0px;
+            letter-spacing: -1px;
+        }
+
+        .value {
+            font-size: 28px;
+            font-weight: 900;
         }
     }    
 

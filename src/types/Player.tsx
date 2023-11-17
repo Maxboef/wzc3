@@ -11,5 +11,6 @@ export declare interface Player {
   total: number;
   weak: number;
   skill: number;
+  image: string;
 }
 [];

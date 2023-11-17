@@ -7,6 +7,7 @@ import star from "./assets/star.svg";
 
 function PlayerCard({ player }: { player: Player }) {
   const nameRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const extraStatsRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef<HTMLDivElement>(null);
@@ -19,6 +20,7 @@ function PlayerCard({ player }: { player: Player }) {
     const tl = gsap.timeline();
 
     gsap.set(nameRef.current, { opacity: 0 });
+    gsap.set(imageRef.current, { opacity: 0 });
 
     // animate each stat individually
     const stats = statsRef.current?.children;
@@ -46,8 +48,9 @@ function PlayerCard({ player }: { player: Player }) {
     );
   };
 
-  const showName = () => {
+  const showDetails = () => {
     gsap.to(nameRef.current, { opacity: 1, duration: 0.5 });
+    gsap.to(imageRef.current, { opacity: 1, duration: 0.5 });
   };
 
   const totalScore = Math.round(
@@ -74,6 +77,12 @@ function PlayerCard({ player }: { player: Player }) {
 
         <div className="player-name" ref={nameRef}>
           {player.name}
+        </div>
+
+        <div className="player-image">
+          {player.image && (
+            <img src={player.image} alt={player.name} ref={imageRef} />
+          )}
         </div>
 
         <div className="extra-stats" ref={extraStatsRef} key="{player.id}">
@@ -128,9 +137,9 @@ function PlayerCard({ player }: { player: Player }) {
 
       <button
         className="block mx-auto btn btn-primary px-5 py-3 bg-blue-950 text-white rounded"
-        onClick={showName}
+        onClick={showDetails}
       >
-        Toon naam
+        Toon speler
       </button>
     </>
   );

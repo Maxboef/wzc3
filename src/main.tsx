@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import AppTemp from "./AppTemp.tsx";
+import App from "./App.tsx";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -9,7 +9,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
   {
     path: "/wzc3" + "/",
-    element: <AppTemp />,
+    element: <App />,
   },
   {
     path: "/wzc3" + "/test",
