@@ -39,17 +39,15 @@ function App() {
   });
 
   return (
-    <div className="bg-blue">
+    <div className="bg-slate-900">
       <Header>
         {user === null && <SignInButton />}
         {user && <SignOutButton />}
       </Header>
 
-      {user && <p>{user.displayName}</p>}
-
-      {matchList}
-
       {user && <PlayerList />}
+
+      {user && <p>{user.displayName}</p>}
     </div>
   );
 }
