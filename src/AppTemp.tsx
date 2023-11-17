@@ -39,7 +39,7 @@ function App() {
   });
 
   return (
-    <div className="bg-blue">
+    <div className="bg-slate-900">
       <Header>
         {user === null && <SignInButton />}
         {user && <SignOutButton />}
@@ -48,8 +48,6 @@ function App() {
       {user && <PlayerList />}
 
       {user && <p>{user.displayName}</p>}
-
-      {matchList}
     </div>
   );
 }

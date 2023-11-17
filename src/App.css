@@ -1,9 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,700;0,900;1,900&display=swap');
 
+html {
+    background-color: #0f172a;
+}
+
 .player-card {
-    background-color: aliceblue;
     width: 360px;
     position: relative;
+    margin: 0 auto;
+    overflow: hidden;
 
     .background {
         width: 100%;
@@ -11,8 +16,11 @@
 
     .player-total {
         position: absolute;
+        font-family: 'Roboto', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: -1px;
         top: 50px;
-        left: 60px;
+        left: 52px;
         font-size: 40px;
         font-weight: 600;
         color: #3f200c;

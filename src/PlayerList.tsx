@@ -8,6 +8,7 @@ import PlayerCard from "./PlayerCard";
 
 function PlayerList() {
   const [players, setPlayers] = useState<Player[]>([]);
+  const [indexCounter, setIndexCounter] = useState(0);
   const playersCollectionRef = collection(db, "players");
 
   useEffect(() => {
@@ -43,11 +44,27 @@ function PlayerList() {
     });
   }, []);
 
+  const nextPlayer = () => {
+    if (indexCounter === players.length - 1) {
+      setIndexCounter(0);
+      return;
+    }
+
+    setIndexCounter(indexCounter + 1);
+  };
+
   return (
     <>
-      {players.map((player, idx) => (
-        <PlayerCard key={idx} player={player} />
-      ))}
+      {players.length && <PlayerCard player={players[indexCounter]} />}
+
+      {players.length && (
+        <button
+          onClick={nextPlayer}
+          className="block mt-5 mx-auto btn btn-primary px-5 py-3 bg-blue-950 text-white rounded"
+        >
+          Volgende Speler
+        </button>
+      )}
     </>
   );
 }
