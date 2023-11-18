@@ -53,7 +53,7 @@ function App() {
             <li className="me-2">
               <NavLink
                 to="/"
-                className="inline-flex items-center justify-center p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group w-[10rem]"
+                className="inline-flex items-center justify-center p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group w-[9rem]"
               >
                 Dashboard
               </NavLink>
@@ -61,15 +61,23 @@ function App() {
             <li className="me-2">
               <NavLink
                 to="/matches"
-                className="inline-flex items-center justify-center p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group w-[10rem]"
+                className="inline-flex items-center justify-center p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group w-[9rem]"
               >
-                Matches
+                Programma
+              </NavLink>
+            </li>
+            <li className="me-2">
+              <NavLink
+                to="/stand"
+                className="inline-flex items-center justify-center p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group w-[9rem]"
+              >
+                Stand
               </NavLink>
             </li>
             <li className="me-2">
               <NavLink
                 to="/players"
-                className="inline-block p-4 text-gray-400 cursor-not-allowed dark:text-gray-500 w-[10rem]"
+                className="inline-block p-4 text-gray-400 cursor-not-allowed dark:text-gray-500 w-[9rem]"
               >
                 Players
               </NavLink>
