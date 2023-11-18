@@ -52,6 +52,7 @@ function PlayerHighlight() {
           <p className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-4xl	 mt-5">
             Player of the week
           </p>
+
           <PlayerCard player={highlightPlayer} autoShowDetails={true} />
         </>
       )}
