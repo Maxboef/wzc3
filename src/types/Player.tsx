@@ -13,5 +13,6 @@ export declare interface Player {
   skill: number;
   image: string;
   cardType: string;
+  inform: boolean;
 }
 [];

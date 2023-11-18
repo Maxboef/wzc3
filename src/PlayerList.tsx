@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
 
 import { db } from "./firebase-auth";
-import { getDocs, collection, addDoc } from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 
 import { Player } from "./types/Player";
 import PlayerCard from "./PlayerCard";
 
 function PlayerList() {
   const [players, setPlayers] = useState<Player[]>([]);
-  const [indexCounter, setIndexCounter] = useState(2);
+  const [indexCounter, setIndexCounter] = useState(0);
   const playersCollectionRef = collection(db, "players");
 
   useEffect(() => {
     const getPlayers = async () => {
       const playersData = await getDocs(playersCollectionRef);
 
-      const data: Player[] = [];
+      let data: Player[] = [];
 
       playersData.docs.map((player) => {
         const returnData = {
@@ -33,10 +33,13 @@ function PlayerList() {
           skill: player.data().skill,
           image: player.data().image,
           cardType: player.data().cardType,
+          inform: player.data().inform,
         };
 
         data.push(returnData);
       });
+
+      data = data.sort(() => 0.5 - Math.random());
 
       return data;
     };
@@ -46,26 +49,26 @@ function PlayerList() {
     });
   }, []);
 
-  const StorePlayer = async () => {
-    // ignore this function
-    const obj = {
-      name: "",
-      cardType: "bronze",
-      def: 87,
-      dri: 63,
-      pac: 71,
-      pas: 69,
-      phy: 81,
-      position: "CB",
-      sho: 48,
-      total: 1,
-      weak: 3,
-      skill: 2,
-      image: "",
-    };
+  // const StorePlayer = async () => {
+  //   // ignore this function
+  //   const obj = {
+  //     name: "",
+  //     cardType: "bronze",
+  //     def: 87,
+  //     dri: 63,
+  //     pac: 71,
+  //     pas: 69,
+  //     phy: 81,
+  //     position: "CB",
+  //     sho: 48,
+  //     total: 1,
+  //     weak: 3,
+  //     skill: 2,
+  //     image: "",
+  //   };
 
-    await addDoc(collection(db, "players"), obj);
-  };
+  //   await addDoc(collection(db, "players"), obj);
+  // };
 
   const nextPlayer = () => {
     if (indexCounter === players.length - 1) {
@@ -78,7 +81,9 @@ function PlayerList() {
 
   return (
     <>
-      {players.length && <PlayerCard player={players[indexCounter]} />}
+      {players.length && (
+        <PlayerCard player={players[indexCounter]} autoShowDetails={false} />
+      )}
 
       {players.length && (
         <button

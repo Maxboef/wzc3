@@ -3,13 +3,24 @@ import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 
 import bronzeCard from "./assets/cards/bronze.png";
+import silverCard from "./assets/cards/silver.png";
+import goldCard from "./assets/cards/gold.png";
+
 import bronzeInformCard from "./assets/cards/bronze-inform.png";
+import silverInformCard from "./assets/cards/silver-inform.png";
+import goldInformCard from "./assets/cards/gold-inform.png";
 
 import legendCard from "./assets/cards/legend.png";
 
 import star from "./assets/star.svg";
 
-function PlayerCard({ player }: { player: Player }) {
+function PlayerCard({
+  player,
+  autoShowDetails = true,
+}: {
+  player: Player;
+  autoShowDetails: boolean;
+}) {
   const backgroundRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -34,6 +45,24 @@ function PlayerCard({ player }: { player: Player }) {
       { rotateY: 180, duration: 0.5, transformOrigin: "50% 50%" }
     );
 
+    tl.fromTo(
+      totalRef.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.5 }
+    );
+
+    tl.fromTo(
+      positionRef.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.5 }
+    );
+
+    tl.fromTo(
+      extraStatsRef.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.5 }
+    );
+
     // animate each stat individually
     const stats = statsRef.current?.children;
     if (stats) {
@@ -47,22 +76,13 @@ function PlayerCard({ player }: { player: Player }) {
       }
     }
 
-    tl.fromTo(
-      extraStatsRef.current,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.5 }
-    );
-
-    tl.fromTo(
-      positionRef.current,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.5 }
-    );
-    tl.fromTo(
-      totalRef.current,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.5 }
-    );
+    if (autoShowDetails) {
+      tl.fromTo(
+        nameRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.5 }
+      );
+    }
   };
 
   const showDetails = () => {
@@ -80,12 +100,23 @@ function PlayerCard({ player }: { player: Player }) {
       6
   );
 
-  const cardPath = (cardType: string) => {
-    switch (cardType) {
+  const cardPath = () => {
+    switch (player.cardType) {
       case "bronze":
+        if (player.inform) {
+          return bronzeInformCard;
+        }
         return bronzeCard;
-      case "bronze-inform":
-        return bronzeInformCard;
+      case "silver":
+        if (player.inform) {
+          return silverInformCard;
+        }
+        return silverCard;
+      case "gold":
+        if (player.inform) {
+          return goldInformCard;
+        }
+        return goldCard;
       case "legend":
         return legendCard;
       default:
@@ -93,13 +124,13 @@ function PlayerCard({ player }: { player: Player }) {
     }
   };
 
-  const informClass = player.cardType.includes("inform") ? " inform" : "";
+  const informClass = player.inform ? " inform" : "";
 
   return (
     <>
       <div className={"player-card" + informClass}>
         <figure className="background" ref={backgroundRef}>
-          <img src={cardPath(player.cardType)} alt="Bronze card" />
+          <img src={cardPath()} alt="Bronze card" />
         </figure>
 
         <div className="player-total" ref={totalRef}>
@@ -169,12 +200,14 @@ function PlayerCard({ player }: { player: Player }) {
         </div>
       </div>
 
-      <button
-        className="block mx-auto btn btn-primary px-5 py-3 bg-blue-950 text-white rounded"
-        onClick={showDetails}
-      >
-        Toon speler
-      </button>
+      {autoShowDetails === false && (
+        <button
+          className="block mx-auto btn btn-primary px-5 py-3 bg-blue-950 text-white rounded"
+          onClick={showDetails}
+        >
+          Toon speler
+        </button>
+      )}
     </>
   );
 }

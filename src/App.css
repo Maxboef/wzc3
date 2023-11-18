@@ -4,6 +4,13 @@ html {
     background-color: #0f172a;
 }
 
+.main-nav {
+    .active {
+        color: #f5f5f5;
+        background-color: #0067b4;
+    }
+}
+
 .player-card {
     width: 360px;
     position: relative;
