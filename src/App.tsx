@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { auth } from "./firebase-auth";
 
 import { User, onAuthStateChanged } from "firebase/auth";
-import { Routes, Route, Outlet, Link, NavLink } from "react-router-dom";
+import { Routes, Route, Outlet, NavLink } from "react-router-dom";
 
 import SignInButton from "./SignInButton";
 import SignOutButton from "./SignOutButton";
