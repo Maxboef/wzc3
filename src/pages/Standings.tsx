@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Club } from "../types/Club";
-import Logo from "../assets/Logo.png";
+import Logo from "../assets/logo.png";
 
 function MatchView() {
   const [clubList, setClublist] = useState<Club[]>([]);
