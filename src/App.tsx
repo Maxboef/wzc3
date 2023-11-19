@@ -11,6 +11,7 @@ import Header from "./Header";
 import PlayerList from "./PlayerList";
 import PlayerHighlight from "./pages/PlayerHighlight";
 import Standings from "./pages/Standings";
+import PlayerStats from "./pages/PlayerStats";
 
 import "./App.css";
 import { Match } from "./types/Match";
@@ -50,11 +51,11 @@ function App() {
         </Header>
 
         <nav className="main-nav border-b border-slate-900 bg-slate-100">
-          <ul className=" text-sm font-medium text-center text-gray-900 rounded-lg shadow flex dark:divide-gray-700 dark:text-gray-400 justify-evenly">
+          <ul className=" text-sm font-medium text-center text-gray-900 rounded-lg shadow flex dark:divide-gray-700 justify-evenly">
             <li className="me-2">
               <NavLink
                 to="/"
-                className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group "
+                className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
               >
                 Dashboard
               </NavLink>
@@ -62,7 +63,7 @@ function App() {
             <li className="me-2">
               <NavLink
                 to="/matches"
-                className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group "
+                className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
               >
                 Programma
               </NavLink>
@@ -70,7 +71,7 @@ function App() {
             <li className="me-2">
               <NavLink
                 to="/stand"
-                className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group "
+                className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
               >
                 Stand
               </NavLink>
@@ -78,11 +79,22 @@ function App() {
             <li className="me-2">
               <NavLink
                 to="/players"
-                className="inline-block  py-3 px-4 text-gray-400 cursor-not-allowed dark:text-gray-500"
+                className="inline-block  py-3 px-4 text-gray-400 cursor-not-allowed"
               >
                 Players
               </NavLink>
             </li>
+
+            {user && user.uid === "2kWK1rUGjEZM5qS5QWzWakDRpHA2" && (
+              <li className="me-2">
+                <NavLink
+                  to="/stats"
+                  className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
+                >
+                  Stats
+                </NavLink>
+              </li>
+            )}
           </ul>
         </nav>
 
@@ -102,7 +114,10 @@ function App() {
           <Route path="/stand" element={<Standings />} />
 
           {user && user.uid === "2kWK1rUGjEZM5qS5QWzWakDRpHA2" && (
-            <Route path="players" element={<PlayerList />} />
+            <>
+              <Route path="players" element={<PlayerList />} />
+              <Route path="stats" element={<PlayerStats />} />
+            </>
           )}
 
           <Route path="*" element={<p>Nope</p>} />
