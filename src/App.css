@@ -26,6 +26,14 @@ html {
         color: white;
     }
 
+    &.silver {
+        color: #3a3d40;
+    }
+
+    &.gold {
+        color: #46390c;
+    }
+
     .player-total {
         position: absolute;
         font-family: 'Roboto', sans-serif;
@@ -36,7 +44,7 @@ html {
         width: 60px;
         text-align: center;
         font-size: 30px;
-        font-weight: 600;
+        font-weight: 800;
     }
 
     .player-position {

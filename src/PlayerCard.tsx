@@ -107,34 +107,52 @@ function PlayerCard({
   );
 
   const cardPath = () => {
-    switch (player.cardType) {
-      case "bronze":
-        if (player.inform) {
-          return bronzeInformCard;
-        }
-        return bronzeCard;
-      case "silver":
-        if (player.inform) {
-          return silverInformCard;
-        }
-        return silverCard;
-      case "gold":
-        if (player.inform) {
-          return goldInformCard;
-        }
-        return goldCard;
-      case "legend":
-        return legendCard;
-      default:
-        return bronzeCard;
+    if (player.cardType === "legend") {
+      return legendCard;
     }
+
+    if (totalScore < 60) {
+      return player.inform ? bronzeInformCard : bronzeCard;
+    }
+
+    if (totalScore < 75) {
+      return player.inform ? silverInformCard : silverCard;
+    }
+
+    if (totalScore >= 75) {
+      return player.inform ? goldInformCard : goldCard;
+    }
+
+    return bronzeCard;
   };
 
-  const informClass = player.inform ? " inform" : "";
+  const cardClass = () => {
+    if (player.cardType === "legend") {
+      return " legend";
+    }
+
+    if (player.inform === true) {
+      return " inform";
+    }
+
+    if (totalScore < 60) {
+      return " bronze";
+    }
+
+    if (totalScore < 75) {
+      return " silver";
+    }
+
+    if (totalScore >= 75) {
+      return " gold";
+    }
+
+    return " bronze";
+  };
 
   return (
     <>
-      <div className={"player-card" + informClass}>
+      <div className={"player-card" + cardClass()}>
         <figure className="background" ref={backgroundRef}>
           <img src={cardPath()} alt="Bronze card" />
         </figure>
