@@ -46,8 +46,8 @@ function MatchView() {
         return (
           <div
             className={
-              "py-1 bg-white grid grid-cols-11 gap-4 text-xs font-semibold justify-items-center align-middle items-center border-b border-gray-300" +
-              (club.eigenteam === "true" ? " bg-blue-100" : "")
+              "py-1 grid grid-cols-11 gap-4 text-xs font-semibold justify-items-center align-middle items-center border-b border-gray-300" +
+              (club.eigenteam === "true" ? " bg-blue-100" : " bg-white")
             }
             key={club.clubrelatiecode}
           >

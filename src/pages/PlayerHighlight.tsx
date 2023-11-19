@@ -29,12 +29,12 @@ function PlayerHighlight() {
         phy: doc.data().phy,
         position: doc.data().position,
         sho: doc.data().sho,
-        total: doc.data().total,
         weak: doc.data().weak,
         skill: doc.data().skill,
         image: doc.data().image,
         cardType: doc.data().cardType,
         inform: doc.data().inform,
+        exp: doc.data().exp,
       };
 
       setHighlightPlayer(highlightPlayer);

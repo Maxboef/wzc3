@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { auth } from "./firebase-auth";
+import { auth, db } from "./firebase-auth";
 
 import { User, onAuthStateChanged } from "firebase/auth";
 import { Routes, Route, Outlet, NavLink } from "react-router-dom";
@@ -16,10 +16,14 @@ import PlayerStats from "./pages/PlayerStats";
 import "./App.css";
 import { Match } from "./types/Match";
 import MatchView from "./MatchView";
+import { AllowedUser } from "./types/AllowedUser";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [upcommingMatches, setUpcommingMatches] = useState<Match[]>([]);
+
+  const [allowedUser, setAllowedUser] = useState<AllowedUser | null>(null);
 
   useEffect(() => {
     getMatches();
@@ -27,6 +31,7 @@ function App() {
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
+    initAllowedUser();
   });
 
   async function getMatches() {
@@ -37,6 +42,26 @@ function App() {
 
     setUpcommingMatches(data);
   }
+
+  const initAllowedUser = async () => {
+    if (user === null || allowedUser !== null) {
+      return;
+    }
+
+    const docRef = doc(db, "allowed_users", user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      setAllowedUser(docSnap.data() as AllowedUser);
+    } else {
+      await setDoc(doc(db, "allowed_users", user.uid), {
+        requested_player_id: "",
+        email: user.email,
+        allowed: false,
+        is_admin: false,
+      });
+    }
+  };
 
   const matchList = upcommingMatches.map((match) => {
     return <MatchView match={match} />;
@@ -55,7 +80,7 @@ function App() {
             <li className="me-2">
               <NavLink
                 to="/"
-                className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
+                className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
               >
                 Dashboard
               </NavLink>
@@ -63,7 +88,7 @@ function App() {
             <li className="me-2">
               <NavLink
                 to="/matches"
-                className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
+                className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
               >
                 Programma
               </NavLink>
@@ -71,7 +96,7 @@ function App() {
             <li className="me-2">
               <NavLink
                 to="/stand"
-                className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
+                className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
               >
                 Stand
               </NavLink>
@@ -79,17 +104,17 @@ function App() {
             <li className="me-2">
               <NavLink
                 to="/players"
-                className="inline-block  py-3 px-4 text-gray-400 cursor-not-allowed"
+                className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
               >
                 Players
               </NavLink>
             </li>
 
-            {user && user.uid === "2kWK1rUGjEZM5qS5QWzWakDRpHA2" && (
+            {user && allowedUser && allowedUser.is_admin && (
               <li className="me-2">
                 <NavLink
                   to="/stats"
-                  className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
+                  className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
                 >
                   Stats
                 </NavLink>
@@ -113,18 +138,26 @@ function App() {
 
           <Route path="/stand" element={<Standings />} />
 
-          {user && user.uid === "2kWK1rUGjEZM5qS5QWzWakDRpHA2" && (
+          {user && allowedUser && allowedUser.allowed && (
+            <Route path="players" element={<PlayerList />} />
+          )}
+
+          {user && allowedUser && allowedUser.is_admin && (
             <>
-              <Route path="players" element={<PlayerList />} />
               <Route path="stats" element={<PlayerStats />} />
             </>
           )}
 
-          <Route path="*" element={<p>Nope</p>} />
+          <Route
+            path="*"
+            element={
+              <p className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-4xl	mt-5">
+                Nope
+              </p>
+            }
+          />
         </Route>
       </Routes>
-
-      {user && <p>{user.uid}</p>}
     </div>
   );
 }

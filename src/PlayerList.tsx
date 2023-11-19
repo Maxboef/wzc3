@@ -11,39 +11,40 @@ function PlayerList() {
   const [indexCounter, setIndexCounter] = useState(0);
   const playersCollectionRef = collection(db, "players");
 
+  const getPlayers = async () => {
+    const playersData = await getDocs(playersCollectionRef);
+
+    let data: Player[] = [];
+
+    playersData.docs.map((player) => {
+      const returnData = {
+        id: player.id,
+        name: player.data().name,
+        def: player.data().def,
+        dri: player.data().dri,
+        pac: player.data().pac,
+        pas: player.data().pas,
+        phy: player.data().phy,
+        position: player.data().position,
+        sho: player.data().sho,
+        total: player.data().total,
+        weak: player.data().weak,
+        skill: player.data().skill,
+        image: player.data().image,
+        cardType: player.data().cardType,
+        inform: player.data().inform,
+        exp: player.data().exp,
+      };
+
+      data.push(returnData);
+    });
+
+    data = data.sort(() => 0.5 - Math.random());
+
+    return data;
+  };
+
   useEffect(() => {
-    const getPlayers = async () => {
-      const playersData = await getDocs(playersCollectionRef);
-
-      let data: Player[] = [];
-
-      playersData.docs.map((player) => {
-        const returnData = {
-          id: player.id,
-          name: player.data().name,
-          def: player.data().def,
-          dri: player.data().dri,
-          pac: player.data().pac,
-          pas: player.data().pas,
-          phy: player.data().phy,
-          position: player.data().position,
-          sho: player.data().sho,
-          weak: player.data().weak,
-          skill: player.data().skill,
-          image: player.data().image,
-          cardType: player.data().cardType,
-          inform: player.data().inform,
-          exp: player.data().exp,
-        };
-
-        data.push(returnData);
-      });
-
-      data = data.sort(() => 0.5 - Math.random());
-
-      return data;
-    };
-
     getPlayers().then((data) => {
       setPlayers(data);
     });
