@@ -38,7 +38,7 @@ function AllowedUsers() {
 
   const toggleAdminUser = async (allowedUser: AllowedUser) => {
     await updateDoc(doc(db, "allowed_users", allowedUser.id), {
-      allowed: !allowedUser.allowed,
+      is_admin: !allowedUser.is_admin,
     });
   };
 

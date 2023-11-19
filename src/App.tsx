@@ -152,7 +152,7 @@ function App() {
             path="*"
             element={
               <p className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-4xl	mt-5">
-                Nope
+                Hier muj nie zijn
               </p>
             }
           />
