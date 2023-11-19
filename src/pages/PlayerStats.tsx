@@ -85,22 +85,50 @@ function PlayerStats() {
     });
   };
 
+  const toggleInform = async (player: Player) => {
+    const playerRef = doc(db, "players", player.id);
+
+    await updateDoc(playerRef, {
+      inform: !player.inform,
+    });
+
+    player.inform = !player.inform;
+  };
+
   return (
     <>
       {players.length && (
         <>
           <div className="bg-white">
             {players.map((player) => (
-              <div className="grid grid-cols-11 gap-4 py-3 border-b text-sm">
-                <div>{player.name}</div>
-                <div>{player.inform ? "Inform" : ""}</div>
+              <div className="flex flex justify-between items-center px-3 py-3 border-b text-sm text-bold">
+                <div className="w-[4rem]">{player.name}</div>
+                <div>
+                  <button
+                    className={
+                      "inline px-4 py-1 bg-blue-950 text-white rounded" +
+                      (player.inform ? " bg-green-500" : "")
+                    }
+                    onClick={() => toggleInform(player)}
+                  >
+                    {player.inform ? "Is Inform" : "Set Inform"}
+                  </button>
+                </div>
                 <div>{player.exp}</div>
                 <div>
                   <button
                     className="inline px-4 py-1 bg-blue-950 text-white rounded"
                     onClick={() => addExpToPlayer(player, 2)}
                   >
-                    Exp
+                    + Exp
+                  </button>
+                </div>
+                <div>
+                  <button
+                    className="inline px-4 py-1 bg-blue-950 text-white rounded"
+                    onClick={() => addExpToPlayer(player, -2)}
+                  >
+                    - Exp
                   </button>
                 </div>
               </div>
