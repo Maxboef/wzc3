@@ -8,7 +8,7 @@ interface Props {
 function Header({ children }: Props) {
   return (
     <header className="bg-blue-900 text-slate-100 px-5 py-2 flex flex-row justify-between items-center">
-      <a href={`/wzc3/`}>
+      <a href={`/`}>
         <img src={logo} alt="Logo" className="w-[2rem]" />
       </a>
       {children}
