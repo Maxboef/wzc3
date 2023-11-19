@@ -52,20 +52,22 @@ function PlayerList() {
   // const StorePlayer = async () => {
   //   // ignore this function
   //   const obj = {
-  //     name: "",
+  //     name: "Niek",
   //     cardType: "bronze",
-  //     def: 87,
-  //     dri: 63,
-  //     pac: 71,
-  //     pas: 69,
-  //     phy: 81,
-  //     position: "CB",
-  //     sho: 48,
+  //     def: 41,
+  //     dri: 50,
+  //     pac: 41,
+  //     pas: 52,
+  //     phy: 52,
+  //     sho: 69,
+  //     position: "CS",
   //     total: 1,
-  //     weak: 3,
-  //     skill: 2,
+  //     weak: 2,
+  //     skill: 5,
   //     image: "",
   //   };
+
+  //   // Average is of object is 50
 
   //   await addDoc(collection(db, "players"), obj);
   // };
@@ -75,6 +77,8 @@ function PlayerList() {
       setIndexCounter(0);
       return;
     }
+
+    // StorePlayer();
 
     setIndexCounter(indexCounter + 1);
   };

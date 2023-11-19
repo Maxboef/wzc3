@@ -10,6 +10,7 @@ import SignOutButton from "./SignOutButton";
 import Header from "./Header";
 import PlayerList from "./PlayerList";
 import PlayerHighlight from "./pages/PlayerHighlight";
+import Standings from "./pages/Standings";
 
 import "./App.css";
 import { Match } from "./types/Match";
@@ -53,7 +54,7 @@ function App() {
             <li className="me-2">
               <NavLink
                 to="/"
-                className="inline-flex items-center justify-center p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group w-[9rem]"
+                className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group "
               >
                 Dashboard
               </NavLink>
@@ -61,7 +62,7 @@ function App() {
             <li className="me-2">
               <NavLink
                 to="/matches"
-                className="inline-flex items-center justify-center p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group w-[9rem]"
+                className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group "
               >
                 Programma
               </NavLink>
@@ -69,7 +70,7 @@ function App() {
             <li className="me-2">
               <NavLink
                 to="/stand"
-                className="inline-flex items-center justify-center p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group w-[9rem]"
+                className="inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group "
               >
                 Stand
               </NavLink>
@@ -77,7 +78,7 @@ function App() {
             <li className="me-2">
               <NavLink
                 to="/players"
-                className="inline-block p-4 text-gray-400 cursor-not-allowed dark:text-gray-500 w-[9rem]"
+                className="inline-block  py-3 px-4 text-gray-400 cursor-not-allowed dark:text-gray-500"
               >
                 Players
               </NavLink>
@@ -97,6 +98,8 @@ function App() {
           <Route index element={<PlayerHighlight />} />
 
           <Route path="/matches" element={matchList} />
+
+          <Route path="/stand" element={<Standings />} />
 
           {user && user.uid === "2kWK1rUGjEZM5qS5QWzWakDRpHA2" && (
             <Route path="players" element={<PlayerList />} />
