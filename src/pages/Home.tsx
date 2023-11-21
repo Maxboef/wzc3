@@ -5,8 +5,10 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 
 import { Player } from "../types/Player";
 import PlayerCard from "../PlayerCard";
+import { Match } from "../types/Match";
+import MatchView from "../MatchView";
 
-function PlayerHighlight() {
+function Home({ upcommingMatch }: { upcommingMatch: Match | null }) {
   const [highlightPlayer, setHighlightPlayer] = useState<Player | null>(null);
 
   const informPlayers = query(
@@ -47,11 +49,20 @@ function PlayerHighlight() {
 
   return (
     <>
+      {upcommingMatch !== null && (
+        <>
+          <h2 className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-4xl	 mt-5">
+            Next match
+          </h2>
+          <MatchView match={upcommingMatch} />
+        </>
+      )}
+
       {highlightPlayer !== null && (
         <>
-          <p className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-4xl	 mt-5">
+          <h2 className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-4xl	 mt-5">
             Player of the week
-          </p>
+          </h2>
 
           <PlayerCard player={highlightPlayer} autoShowDetails={true} />
         </>
@@ -60,4 +71,4 @@ function PlayerHighlight() {
   );
 }
 
-export default PlayerHighlight;
+export default Home;

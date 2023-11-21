@@ -9,7 +9,7 @@ import SignOutButton from "./SignOutButton";
 
 import Header from "./Header";
 import PlayerList from "./PlayerList";
-import PlayerHighlight from "./pages/PlayerHighlight";
+import Home from "./pages/Home";
 import Standings from "./pages/Standings";
 import PlayerStats from "./pages/PlayerStats";
 
@@ -132,7 +132,16 @@ function App() {
     <div className="bg-slate-900">
       <Routes>
         <Route path="/" element={layout()}>
-          <Route index element={<PlayerHighlight />} />
+          <Route
+            index
+            element={
+              <Home
+                upcommingMatch={
+                  upcommingMatches.length > 0 ? upcommingMatches[0] : null
+                }
+              />
+            }
+          />
 
           <Route path="/matches" element={matchList} />
 
