@@ -60,8 +60,8 @@ function Home({ upcommingMatch }: { upcommingMatch: Match | null }) {
 
       {highlightPlayer !== null && (
         <>
-          <h2 className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-4xl	 mt-5">
-            Player of the week
+          <h2 className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-2xl	 mt-5">
+            Mooiste goal op de training
           </h2>
 
           <PlayerCard player={highlightPlayer} autoShowDetails={true} />
