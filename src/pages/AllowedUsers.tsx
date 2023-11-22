@@ -44,8 +44,8 @@ function AllowedUsers() {
   };
 
   const linkUserToPlayer = async (allowedUser: AllowedUser) => {
-    await updateDoc(doc(db, "players", allowedUser.requested_player_id), {
-      user_id: allowedUser.id,
+    await updateDoc(doc(db, "allowed_users", allowedUser.id), {
+      linked_player_id: allowedUser.requested_player_id,
     });
   };
 
@@ -87,7 +87,7 @@ function AllowedUsers() {
                 className="inline px-4 py-1 bg-blue-950 text-white rounded"
                 onClick={() => linkUserToPlayer(allowedUser)}
               >
-                Link to player
+                Link
               </button>
             )}
           </div>
@@ -97,7 +97,7 @@ function AllowedUsers() {
                 className="inline px-4 py-1 bg-blue-950 text-white rounded bg-green-500"
                 onClick={() => clearLinkedPlayer(allowedUser)}
               >
-                Clear linked player
+                Clear
               </button>
             )}
           </div>
@@ -108,7 +108,7 @@ function AllowedUsers() {
                 className="inline px-4 py-1 bg-blue-950 text-white rounded bg-green-500"
                 onClick={() => toggleAdminUser(allowedUser)}
               >
-                User is admin
+                Is admin
               </button>
             ) : (
               <button
