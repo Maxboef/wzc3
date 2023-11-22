@@ -20,6 +20,7 @@ function AllowedUsers() {
         requested_player_id: allowedUser.data().requested_player_id,
         allowed: allowedUser.data().allowed,
         is_admin: allowedUser.data().is_admin,
+        linked_player_id: allowedUser.data().linked_player_id,
       };
 
       data.push(returnData);

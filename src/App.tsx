@@ -52,7 +52,8 @@ function App() {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      setAllowedUser(docSnap.data() as AllowedUser);
+      const allowedUser = { ...docSnap.data(), id: docSnap.id };
+      setAllowedUser(allowedUser as AllowedUser);
     } else {
       await setDoc(doc(db, "allowed_users", user.uid), {
         linked_player_id: "",
@@ -103,7 +104,10 @@ function App() {
           <Route path="/stand" element={<Standings />} />
 
           {user && allowedUser && allowedUser.allowed && (
-            <Route path="players" element={<PlayerList />} />
+            <Route
+              path="players"
+              element={<PlayerList allowedUser={allowedUser} />}
+            />
           )}
 
           {user && allowedUser && allowedUser.is_admin && (
