@@ -1,4 +1,4 @@
-import { Player } from "./types/Player";
+import { Player } from "../../types/Player";
 import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 
@@ -13,13 +13,17 @@ import goldInformCard from "./assets/cards/gold-inform.png";
 import legendCard from "./assets/cards/legend.webp";
 
 import star from "./assets/star.svg";
+import { User } from "firebase/auth";
+import { AllowedUser } from "../../types/AllowedUser";
 
 function PlayerCard({
   player,
   autoShowDetails = true,
+  alllowedUser = null,
 }: {
   player: Player;
   autoShowDetails: boolean;
+  alllowedUser: AllowedUser | null;
 }) {
   const backgroundRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
@@ -150,6 +154,14 @@ function PlayerCard({
     return " bronze";
   };
 
+  const userIsLinkedPlayer = () => {
+    if (alllowedUser && alllowedUser.linked_player_id === player.id) {
+      return true;
+    }
+
+    return false;
+  };
+
   return (
     <>
       <div className={"player-card" + cardClass()}>
@@ -223,6 +235,8 @@ function PlayerCard({
           </div>
         </div>
       </div>
+
+      {userIsLinkedPlayer() && <</>}
 
       {autoShowDetails === false && (
         <button

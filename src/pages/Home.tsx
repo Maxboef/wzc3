@@ -4,9 +4,9 @@ import { db } from "../firebase-auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 import { Player } from "../types/Player";
-import PlayerCard from "../PlayerCard";
+import PlayerCard from "../components/molecules/PlayerCard";
 import { Match } from "../types/Match";
-import MatchView from "../MatchView";
+import MatchView from "../components/molecules/MatchView";
 
 function Home({ upcommingMatch }: { upcommingMatch: Match | null }) {
   const [highlightPlayer, setHighlightPlayer] = useState<Player | null>(null);

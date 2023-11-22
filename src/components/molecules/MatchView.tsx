@@ -1,4 +1,4 @@
-import { Match } from "./types/Match";
+import { Match } from "../../types/Match";
 import Logo from "./assets/logo.png";
 
 interface Props {

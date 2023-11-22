@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-import { db } from "./firebase-auth";
+import { db } from "../../firebase-auth";
 import { getDocs, collection } from "firebase/firestore";
 
-import { Player } from "./types/Player";
+import { Player } from "../../types/Player";
 import PlayerCard from "./PlayerCard";
 
 function PlayerList() {

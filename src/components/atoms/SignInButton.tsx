@@ -1,5 +1,5 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "./firebase-auth";
+import { auth } from "../../firebase-auth";
 
 import googleSvg from "./assets/google.svg";
 

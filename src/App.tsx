@@ -2,20 +2,20 @@ import { useEffect, useState } from "react";
 import { auth, db } from "./firebase-auth";
 
 import { User, onAuthStateChanged } from "firebase/auth";
-import { Routes, Route, Outlet, NavLink } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 
-import SignInButton from "./SignInButton";
-import SignOutButton from "./SignOutButton";
+import SignInButton from "./components/atoms/SignInButton";
+import SignOutButton from "./components/atoms/SignOutButton";
 
 import Header from "./components/organisms/Header";
-import PlayerList from "./PlayerList";
+import PlayerList from "./components/molecules/PlayerList";
 import Home from "./pages/Home";
 import Standings from "./pages/Standings";
 import PlayerStats from "./pages/PlayerStats";
 
 import "./App.css";
 import { Match } from "./types/Match";
-import MatchView from "./MatchView";
+import MatchView from "./components/molecules/MatchView";
 import { AllowedUser } from "./types/AllowedUser";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import Nav from "./components/organisms/Nax";
@@ -55,6 +55,7 @@ function App() {
       setAllowedUser(docSnap.data() as AllowedUser);
     } else {
       await setDoc(doc(db, "allowed_users", user.uid), {
+        linked_player_id: "",
         requested_player_id: "",
         email: user.email,
         allowed: false,
@@ -106,9 +107,7 @@ function App() {
           )}
 
           {user && allowedUser && allowedUser.is_admin && (
-            <>
-              <Route path="stats" element={<PlayerStats />} />
-            </>
+            <Route path="stats" element={<PlayerStats />} />
           )}
 
           <Route
