@@ -2,18 +2,18 @@ import { Player } from "../../types/Player";
 import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 
-import bronzeCard from "./assets/cards/bronze.webp";
-import silverCard from "./assets/cards/silver.png";
-import goldCard from "./assets/cards/gold.png";
+import bronzeCard from "./../../assets/cards/bronze.png";
+import silverCard from "./../../assets/cards/silver.png";
+import goldCard from "./../../assets/cards/gold.png";
 
-import bronzeInformCard from "./assets/cards/bronze-inform.webp";
-import silverInformCard from "./assets/cards/silver-inform.png";
-import goldInformCard from "./assets/cards/gold-inform.png";
+import bronzeInformCard from "./../../assets/cards/bronze-inform.webp";
+import silverInformCard from "./../../assets/cards/silver-inform.png";
+import goldInformCard from "./../../assets/cards/gold-inform.png";
 
-import legendCard from "./assets/cards/legend.webp";
+import legendCard from "./../../assets/cards/legend.webp";
 
-import star from "./assets/star.svg";
-import { User } from "firebase/auth";
+import star from "./../../assets/star.svg";
+
 import { AllowedUser } from "../../types/AllowedUser";
 
 function PlayerCard({
@@ -23,7 +23,7 @@ function PlayerCard({
 }: {
   player: Player;
   autoShowDetails: boolean;
-  alllowedUser: AllowedUser | null;
+  alllowedUser?: AllowedUser | null;
 }) {
   const backgroundRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
@@ -236,7 +236,13 @@ function PlayerCard({
         </div>
       </div>
 
-      {userIsLinkedPlayer() && <</>}
+      {userIsLinkedPlayer() && (
+        <>
+          <div className="text-center mt-5">
+            <span className="text-white">Dit is jouw speler</span>
+          </div>
+        </>
+      )}
 
       {autoShowDetails === false && (
         <button
