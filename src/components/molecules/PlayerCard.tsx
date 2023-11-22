@@ -2,13 +2,13 @@ import { Player } from "../../types/Player";
 import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 
-import bronzeCard from "./../../assets/cards/bronze.png";
-import silverCard from "./../../assets/cards/silver.png";
-import goldCard from "./../../assets/cards/gold.png";
+import bronzeCard from "./../../assets/cards/bronze.webp";
+import silverCard from "./../../assets/cards/silver.webp";
+import goldCard from "./../../assets/cards/gold.webp";
 
 import bronzeInformCard from "./../../assets/cards/bronze-inform.webp";
-import silverInformCard from "./../../assets/cards/silver-inform.png";
-import goldInformCard from "./../../assets/cards/gold-inform.png";
+import silverInformCard from "./../../assets/cards/silver-inform.webp";
+import goldInformCard from "./../../assets/cards/gold-inform.webp";
 
 import legendCard from "./../../assets/cards/legend.webp";
 
