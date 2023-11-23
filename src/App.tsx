@@ -19,14 +19,17 @@ import MatchView from "./components/molecules/MatchView";
 import { AllowedUser } from "./types/AllowedUser";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import Nav from "./components/organisms/Nax";
+import { HistoryMatch } from "./types/HistoryMatch";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [upcommingMatches, setUpcommingMatches] = useState<Match[]>([]);
   const [allowedUser, setAllowedUser] = useState<AllowedUser | null>(null);
+  const [historyMatches, setHistoryMatches] = useState<HistoryMatch[]>([]);
 
   useEffect(() => {
     getMatches();
+    getHistoryMatches();
   }, []);
 
   onAuthStateChanged(auth, (currentUser) => {
@@ -41,6 +44,15 @@ function App() {
     const data = await response.json();
 
     setUpcommingMatches(data);
+  }
+
+  async function getHistoryMatches() {
+    const response = await fetch(
+      "https://data.sportlink.com/pouleuitslagen?aantaldagen=180&weekoffset=-22&poulecode=720229&eigenwedstrijden=NEE&sorteervolgorde=datum-omgekeerd&gebruiklokaleteamgegevens=NEE&client_id=bybEeY5S2Y"
+    );
+    const data = await response.json();
+
+    setHistoryMatches(data);
   }
 
   const initAllowedUser = async () => {
@@ -95,6 +107,7 @@ function App() {
                 upcommingMatch={
                   upcommingMatches.length > 0 ? upcommingMatches[0] : null
                 }
+                historyMatches={historyMatches?.length ? historyMatches : []}
               />
             }
           />

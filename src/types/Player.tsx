@@ -15,4 +15,3 @@ export declare interface Player {
   inform: boolean;
   exp: number;
 }
-[];

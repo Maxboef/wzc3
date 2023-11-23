@@ -13,4 +13,3 @@ export declare interface Club {
   verliespunten: number;
   verloren: string;
 }
-[];

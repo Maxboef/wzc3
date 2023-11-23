@@ -1,8 +1,11 @@
+import { HistoryMatch } from "../../types/HistoryMatch";
 import { Match } from "../../types/Match";
 import Logo from "./../../assets/logo.png";
+import ClubMatchHistory from "./ClubMatchHistory";
 
 interface Props {
   match: Match;
+  historyMatches?: HistoryMatch[];
 }
 
 function formatPath(relationCode: string) {
@@ -40,7 +43,7 @@ function formatAttendTime(match: Match) {
   return date.toLocaleTimeString("nl-NL", options);
 }
 
-function MatchView({ match }: Props) {
+function MatchView({ match, historyMatches }: Props) {
   return (
     <div className="m-2 bg-white bg-slate-100 mb-5 rounded">
       <div className="bg-blue-500 py-0.5 border-b-2 border-blue-400 text-center text-xs text-white font-black italic uppercase font-roboto">
@@ -56,9 +59,14 @@ function MatchView({ match }: Props) {
           <span className="text-xs font-semibold font-sans">
             {match.thuisteam}
           </span>
+
+          <ClubMatchHistory
+            clubString={match.thuisteamclubrelatiecode}
+            historyMatches={historyMatches?.length ? historyMatches : []}
+          />
         </div>
         <div>
-          <div className="text-sm font-semibold text-center">
+          <div className="flex flex-col justify-center items-center font-semibold text-sm">
             <span className="block">
               <span className="font-normal text-xs w-[4rem] inline-block">
                 Wedstrijd
@@ -71,6 +79,12 @@ function MatchView({ match }: Props) {
               </span>
               {formatAttendTime(match)}
             </span>
+            <span className="block">
+              <span className="font-normal text-xs w-[4rem] inline-block  text-center">
+                Wassen
+              </span>
+              Werner
+            </span>
           </div>
         </div>
         <div className="text-center">
@@ -79,6 +93,10 @@ function MatchView({ match }: Props) {
             className="w-[3rem] m-auto"
           />
           <span className="text-xs font-semibold">{match.uitteam}</span>
+          <ClubMatchHistory
+            clubString={match.uitteamclubrelatiecode}
+            historyMatches={historyMatches?.length ? historyMatches : []}
+          />
         </div>
       </div>
     </div>

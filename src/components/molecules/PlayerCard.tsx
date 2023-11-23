@@ -149,7 +149,6 @@ function PlayerCard({
         <div className="card-content ">
           <Tilt
             gyroscope={true}
-            tiltAngleXInitial={-2}
             tiltMaxAngleX={5}
             tiltMaxAngleY={20}
             glareEnable={true}
