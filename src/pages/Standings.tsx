@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Club } from "../types/Club";
 import Logo from "../assets/logo.png";
+import ClubMatchHistory from "../components/molecules/ClubMatchHistory";
+import { HistoryMatch } from "../types/HistoryMatch";
 
-function MatchView() {
+function MatchView({ historyMatches }: { historyMatches: HistoryMatch[] }) {
   const [clubList, setClublist] = useState<Club[]>([]);
 
   function formatPath(relationCode: string) {
@@ -28,47 +30,74 @@ function MatchView() {
 
   return (
     <>
-      <div className="mt-2 flex flex-row justify-between items-center text-center bg-blue-500 border-b-2 border-blue-400 text-xs text-white font-black italic uppercase font-roboto ">
-        <div className="w-[11.5rem]"></div>
-        <div className="w-[1.5rem] font-bold">G</div>
-        <div className="w-[1.5rem] font-bold">W</div>
-        <div className="w-[1.5rem] font-bold">G</div>
-        <div className="w-[1.5rem] font-bold">V</div>
-        <div className="w-[1.5rem] font-bold">P</div>
-        <div className="w-[1.5rem] font-bold">D</div>
-        <div className="w-[1.5rem] font-bold">+</div>
-        <div className="w-[1.5rem] font-bold pr-3">-</div>
-      </div>
+      <div className="flex flex-row w-full mt-2">
+        <div className="club-list">
+          <div className="bg-blue-500 border-b-2 border-blue-400 h-5"></div>
 
-      {clubList.map((club, index) => {
-        return (
-          <div
-            className={
-              "flex flex-row justify-between items-center text-xs font-semibold items-center text-center border-b border-gray-300" +
-              (club.eigenteam === "true" ? " bg-blue-100" : " bg-white")
-            }
-            key={club.clubrelatiecode}
-          >
-            <div className="flex flex-row justify-center items-center py-0.5">
-              <span className="font-bold inline-block h-4 ml-2 mr-2 w-[1rem]">
-                {index + 1}
-              </span>
-              <img src={formatPath(club.clubrelatiecode)} width={28} />
-              <div className="w-[8rem] pl-2 text-left">{club.teamnaam}</div>
-            </div>
-            <div className="w-[1.5rem] bg-blue-100 py-3 text-semibold">
-              {club.gespeeldewedstrijden}
-            </div>
-            <div className="w-[1.5rem]">{club.gewonnen}</div>
-            <div className="w-[1.5rem]">{club.gelijk}</div>
-            <div className="w-[1.5rem]">{club.verloren}</div>
-            <div className="w-[1.5rem]">{club.punten}</div>
-            <div className="w-[1.5rem]">{club.doelsaldo}</div>
-            <div className="w-[1.5rem]">{club.doelpuntenvoor}</div>
-            <div className="w-[1.5rem]">{club.doelpuntentegen}</div>
+          {clubList.map((club, index) => {
+            return (
+              <div
+                className={
+                  "w-[12rem] h-[2.5rem] flex flex-row justify-between items-center text-xs font-semibold items-center text-center border-b border-gray-300" +
+                  (club.eigenteam === "true" ? " bg-blue-100" : " bg-white")
+                }
+                key={club.clubrelatiecode}
+              >
+                <div className="flex flex-row justify-center items-center py-0.5">
+                  <span className="font-bold inline-block h-4 ml-2 mr-2 w-[1rem]">
+                    {index + 1}
+                  </span>
+                  <img src={formatPath(club.clubrelatiecode)} width={28} />
+                  <div className="w-[8rem] pl-2 text-left">{club.teamnaam}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="score-wrapper overflow-x-auto">
+          <div className="font-bold flex flex-row justify-between items-center text-center bg-blue-500 border-b-2 border-blue-400 text-xs text-white font-black italic font-roboto h-5">
+            <div className="w-[4rem]">G</div>
+            <div className="w-[4rem]">W</div>
+            <div className="w-[4rem]">G</div>
+            <div className="w-[4rem]">V</div>
+            <div className="w-[4rem]">Pts</div>
+            <div className="w-[4rem]">D</div>
+            <div className="w-[4rem]">+</div>
+            <div className="w-[4rem]">-</div>
+            <div className="w-[14rem]">Laatste 5</div>
           </div>
-        );
-      })}
+
+          {clubList.map((club) => {
+            return (
+              <div
+                className={
+                  "h-[2.5rem] flex flex-row justify-between text-xs font-semibold items-center text-center border-b border-gray-300" +
+                  (club.eigenteam === "true" ? " bg-blue-100" : " bg-white")
+                }
+                key={club.clubrelatiecode}
+              >
+                <div className="w-[4rem] h-full bg-blue-100 text-semibold flex items-center justify-center">
+                  {club.gespeeldewedstrijden}
+                </div>
+                <div className="w-[4rem]">{club.gewonnen}</div>
+                <div className="w-[4rem]">{club.gelijk}</div>
+                <div className="w-[4rem]">{club.verloren}</div>
+                <div className="w-[4rem]">{club.punten}</div>
+                <div className="w-[4rem]">{club.doelsaldo}</div>
+                <div className="w-[4rem]">{club.doelpuntenvoor}</div>
+                <div className="w-[4rem]">{club.doelpuntentegen}</div>
+                <div className="w-[14rem]">
+                  <ClubMatchHistory
+                    clubString={club.clubrelatiecode}
+                    historyMatches={historyMatches}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </>
   );
 }

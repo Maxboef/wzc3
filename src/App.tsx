@@ -48,7 +48,7 @@ function App() {
 
   async function getHistoryMatches() {
     const response = await fetch(
-      "https://data.sportlink.com/pouleuitslagen?aantaldagen=180&weekoffset=-22&poulecode=720229&eigenwedstrijden=NEE&sorteervolgorde=datum-omgekeerd&gebruiklokaleteamgegevens=NEE&client_id=bybEeY5S2Y"
+      "https://data.sportlink.com/pouleuitslagen?aantaldagen=180&weekoffset=-10&poulecode=720229&eigenwedstrijden=NEE&sorteervolgorde=datum-omgekeerd&gebruiklokaleteamgegevens=NEE&client_id=bybEeY5S2Y"
     );
     const data = await response.json();
 
@@ -114,7 +114,14 @@ function App() {
 
           <Route path="/matches" element={matchList} />
 
-          <Route path="/stand" element={<Standings />} />
+          <Route
+            path="/stand"
+            element={
+              <Standings
+                historyMatches={historyMatches?.length ? historyMatches : []}
+              />
+            }
+          />
 
           {user && allowedUser && allowedUser.allowed && (
             <Route

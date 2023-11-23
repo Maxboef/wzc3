@@ -79,12 +79,6 @@ function MatchView({ match, historyMatches }: Props) {
               </span>
               {formatAttendTime(match)}
             </span>
-            <span className="block">
-              <span className="font-normal text-xs w-[4rem] inline-block  text-center">
-                Wassen
-              </span>
-              Werner
-            </span>
           </div>
         </div>
         <div className="text-center">
