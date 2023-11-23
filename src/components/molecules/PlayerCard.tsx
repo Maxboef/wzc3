@@ -1,30 +1,34 @@
-import { Player } from "./types/Player";
+import { Player } from "../../types/Player";
 import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 
-import bronzeCard from "./assets/cards/bronze.png";
-import silverCard from "./assets/cards/silver.png";
-import goldCard from "./assets/cards/gold.png";
+import bronzeCard from "./../../assets/cards/bronze.webp";
+import silverCard from "./../../assets/cards/silver.webp";
+import goldCard from "./../../assets/cards/gold.webp";
 
-import bronzeInformCard from "./assets/cards/bronze-inform.png";
-import silverInformCard from "./assets/cards/silver-inform.png";
-import goldInformCard from "./assets/cards/gold-inform.png";
+import bronzeInformCard from "./../../assets/cards/bronze-inform.webp";
+import silverInformCard from "./../../assets/cards/silver-inform.webp";
+import goldInformCard from "./../../assets/cards/gold-inform.webp";
 
-import legendCard from "./assets/cards/legend.png";
+import legendCard from "./../../assets/cards/legend.webp";
 
-import star from "./assets/star.svg";
+import star from "./../../assets/star.svg";
+
+import { AllowedUser } from "../../types/AllowedUser";
+import PlayerCardStats from "./PlayerCardStats";
 
 function PlayerCard({
   player,
   autoShowDetails = true,
+  allowedUser,
 }: {
   player: Player;
   autoShowDetails: boolean;
+  allowedUser?: AllowedUser;
 }) {
   const backgroundRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
   const extraStatsRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef<HTMLDivElement>(null);
   const totalRef = useRef<HTMLDivElement>(null);
@@ -62,19 +66,6 @@ function PlayerCard({
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 0.5 }
     );
-
-    // animate each stat individually
-    const stats = statsRef.current?.children;
-    if (stats) {
-      for (let i = 0; i < stats.length; i++) {
-        tl.fromTo(
-          stats[i],
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.35 },
-          "-=0.3"
-        );
-      }
-    }
 
     if (autoShowDetails) {
       tl.fromTo(
@@ -191,37 +182,7 @@ function PlayerCard({
           </div>
         </div>
 
-        <div className="stats" ref={statsRef}>
-          <div className="stat">
-            <span className="label">PAC</span>
-            <span className="value">{player.pac}</span>
-          </div>
-
-          <div className="stat">
-            <span className="label">SHO</span>
-            <span className="value">{player.sho}</span>
-          </div>
-
-          <div className="stat">
-            <span className="label">PAS</span>
-            <span className="value">{player.pas}</span>
-          </div>
-
-          <div className="stat">
-            <span className="label">DRI</span>
-            <span className="value">{player.dri}</span>
-          </div>
-
-          <div className="stat">
-            <span className="label">DEF</span>
-            <span className="value">{player.def}</span>
-          </div>
-
-          <div className="stat">
-            <span className="label">PHY</span>
-            <span className="value">{player.phy}</span>
-          </div>
-        </div>
+        <PlayerCardStats player={player} allowedUser={allowedUser} />
       </div>
 
       {autoShowDetails === false && (

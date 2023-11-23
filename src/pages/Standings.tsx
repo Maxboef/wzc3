@@ -28,48 +28,44 @@ function MatchView() {
 
   return (
     <>
-      <div className="mt-2 bg-blue-500 border-b-2 border-blue-400 text-center text-xs text-white font-black italic uppercase font-roboto grid grid-cols-11 gap-4">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div className="font-bold">G</div>
-        <div className="font-bold">W</div>
-        <div className="font-bold">G</div>
-        <div className="font-bold">V</div>
-        <div className="font-bold">P</div>
-        <div className="font-bold">D</div>
-        <div className="font-bold">+</div>
-        <div className="font-bold">-</div>
+      <div className="mt-2 flex flex-row justify-between items-center text-center bg-blue-500 border-b-2 border-blue-400 text-xs text-white font-black italic uppercase font-roboto ">
+        <div className="w-[11.5rem]"></div>
+        <div className="w-[1.5rem] font-bold">G</div>
+        <div className="w-[1.5rem] font-bold">W</div>
+        <div className="w-[1.5rem] font-bold">G</div>
+        <div className="w-[1.5rem] font-bold">V</div>
+        <div className="w-[1.5rem] font-bold">P</div>
+        <div className="w-[1.5rem] font-bold">D</div>
+        <div className="w-[1.5rem] font-bold">+</div>
+        <div className="w-[1.5rem] font-bold pr-3">-</div>
       </div>
 
       {clubList.map((club, index) => {
         return (
           <div
             className={
-              "py-1 grid grid-cols-11 gap-4 text-xs font-semibold justify-items-center align-middle items-center border-b border-gray-300" +
+              "flex flex-row justify-between items-center text-xs font-semibold items-center text-center border-b border-gray-300" +
               (club.eigenteam === "true" ? " bg-blue-100" : " bg-white")
             }
             key={club.clubrelatiecode}
           >
-            <div className="flex flex-row justify-center items-center">
-              <span className="font-bold inline-block h-4 ml-2 mr-2 text-center">
+            <div className="flex flex-row justify-center items-center py-0.5">
+              <span className="font-bold inline-block h-4 ml-2 mr-2 w-[1rem]">
                 {index + 1}
               </span>
-              <img
-                src={formatPath(club.clubrelatiecode)}
-                width={32}
-                height={28}
-              />
+              <img src={formatPath(club.clubrelatiecode)} width={28} />
+              <div className="w-[8rem] pl-2 text-left">{club.teamnaam}</div>
             </div>
-            <div className="col-span-2 text-center">{club.teamnaam}</div>
-            <div className="">{club.gespeeldewedstrijden}</div>
-            <div>{club.gewonnen}</div>
-            <div>{club.gelijk}</div>
-            <div>{club.verloren}</div>
-            <div>{club.punten}</div>
-            <div>{club.doelsaldo}</div>
-            <div>{club.doelpuntenvoor}</div>
-            <div>{club.doelpuntentegen}</div>
+            <div className="w-[1.5rem] bg-blue-100 py-3 text-semibold">
+              {club.gespeeldewedstrijden}
+            </div>
+            <div className="w-[1.5rem]">{club.gewonnen}</div>
+            <div className="w-[1.5rem]">{club.gelijk}</div>
+            <div className="w-[1.5rem]">{club.verloren}</div>
+            <div className="w-[1.5rem]">{club.punten}</div>
+            <div className="w-[1.5rem]">{club.doelsaldo}</div>
+            <div className="w-[1.5rem]">{club.doelpuntenvoor}</div>
+            <div className="w-[1.5rem]">{club.doelpuntentegen}</div>
           </div>
         );
       })}

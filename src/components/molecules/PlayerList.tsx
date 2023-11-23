@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 
-import { db } from "./firebase-auth";
+import { db } from "../../firebase-auth";
 import { getDocs, collection } from "firebase/firestore";
 
-import { Player } from "./types/Player";
+import { Player } from "../../types/Player";
 import PlayerCard from "./PlayerCard";
+import { AllowedUser } from "../../types/AllowedUser";
 
-function PlayerList() {
+function PlayerList({ allowedUser }: { allowedUser?: AllowedUser }) {
   const [players, setPlayers] = useState<Player[]>([]);
   const [indexCounter, setIndexCounter] = useState(0);
   const playersCollectionRef = collection(db, "players");
@@ -62,7 +63,11 @@ function PlayerList() {
   return (
     <>
       {players.length && (
-        <PlayerCard player={players[indexCounter]} autoShowDetails={false} />
+        <PlayerCard
+          player={players[indexCounter]}
+          autoShowDetails={false}
+          allowedUser={allowedUser}
+        />
       )}
 
       {players.length && (

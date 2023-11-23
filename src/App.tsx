@@ -2,27 +2,27 @@ import { useEffect, useState } from "react";
 import { auth, db } from "./firebase-auth";
 
 import { User, onAuthStateChanged } from "firebase/auth";
-import { Routes, Route, Outlet, NavLink } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 
-import SignInButton from "./SignInButton";
-import SignOutButton from "./SignOutButton";
+import SignInButton from "./components/atoms/SignInButton";
+import SignOutButton from "./components/atoms/SignOutButton";
 
-import Header from "./Header";
-import PlayerList from "./PlayerList";
-import PlayerHighlight from "./pages/PlayerHighlight";
+import Header from "./components/organisms/Header";
+import PlayerList from "./components/molecules/PlayerList";
+import Home from "./pages/Home";
 import Standings from "./pages/Standings";
 import PlayerStats from "./pages/PlayerStats";
 
 import "./App.css";
 import { Match } from "./types/Match";
-import MatchView from "./MatchView";
+import MatchView from "./components/molecules/MatchView";
 import { AllowedUser } from "./types/AllowedUser";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import Nav from "./components/organisms/Nax";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [upcommingMatches, setUpcommingMatches] = useState<Match[]>([]);
-
   const [allowedUser, setAllowedUser] = useState<AllowedUser | null>(null);
 
   useEffect(() => {
@@ -52,9 +52,11 @@ function App() {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      setAllowedUser(docSnap.data() as AllowedUser);
+      const allowedUser = { ...docSnap.data(), id: docSnap.id };
+      setAllowedUser(allowedUser as AllowedUser);
     } else {
       await setDoc(doc(db, "allowed_users", user.uid), {
+        linked_player_id: "",
         requested_player_id: "",
         email: user.email,
         allowed: false,
@@ -69,62 +71,16 @@ function App() {
 
   const layout = () => {
     return (
-      <div>
+      <>
         <Header>
           {user === null && <SignInButton />}
           {user && <SignOutButton />}
         </Header>
 
-        <nav className="main-nav border-b border-slate-900 bg-slate-100">
-          <ul className=" text-sm font-medium text-center text-gray-900 rounded-lg shadow flex dark:divide-gray-700 justify-evenly">
-            <li className="me-2">
-              <NavLink
-                to="/"
-                className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
-              >
-                Dashboard
-              </NavLink>
-            </li>
-            <li className="me-2">
-              <NavLink
-                to="/matches"
-                className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
-              >
-                Programma
-              </NavLink>
-            </li>
-            <li className="me-2">
-              <NavLink
-                to="/stand"
-                className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
-              >
-                Stand
-              </NavLink>
-            </li>
-            <li className="me-2">
-              <NavLink
-                to="/players"
-                className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
-              >
-                Players
-              </NavLink>
-            </li>
-
-            {user && allowedUser && allowedUser.is_admin && (
-              <li className="me-2">
-                <NavLink
-                  to="/stats"
-                  className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
-                >
-                  Stats
-                </NavLink>
-              </li>
-            )}
-          </ul>
-        </nav>
+        <Nav user={user} allowedUser={allowedUser} />
 
         <Outlet />
-      </div>
+      </>
     );
   };
 
@@ -132,20 +88,30 @@ function App() {
     <div className="bg-slate-900">
       <Routes>
         <Route path="/" element={layout()}>
-          <Route index element={<PlayerHighlight />} />
+          <Route
+            index
+            element={
+              <Home
+                upcommingMatch={
+                  upcommingMatches.length > 0 ? upcommingMatches[0] : null
+                }
+              />
+            }
+          />
 
           <Route path="/matches" element={matchList} />
 
           <Route path="/stand" element={<Standings />} />
 
           {user && allowedUser && allowedUser.allowed && (
-            <Route path="players" element={<PlayerList />} />
+            <Route
+              path="players"
+              element={<PlayerList allowedUser={allowedUser} />}
+            />
           )}
 
           {user && allowedUser && allowedUser.is_admin && (
-            <>
-              <Route path="stats" element={<PlayerStats />} />
-            </>
+            <Route path="stats" element={<PlayerStats />} />
           )}
 
           <Route

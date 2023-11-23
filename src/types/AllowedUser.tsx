@@ -4,5 +4,6 @@ export declare interface AllowedUser {
   allowed: boolean;
   is_admin: boolean;
   requested_player_id: string;
+  linked_player_id: string;
 }
 [];

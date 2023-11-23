@@ -1,5 +1,5 @@
 export declare interface Player {
-  id: string;
+  readonly id: string;
   name: string;
   def: number;
   dri: number;
