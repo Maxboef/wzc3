@@ -97,7 +97,7 @@ function App() {
   };
 
   return (
-    <div className="bg-slate-900 overflow-x-hidden">
+    <div className="bg-slate-900 overflow-x-hidden max-w-3xl m-auto">
       <Routes>
         <Route path="/" element={layout()}>
           <Route
