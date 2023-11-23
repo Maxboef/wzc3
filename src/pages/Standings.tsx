@@ -38,7 +38,7 @@ function MatchView({ historyMatches }: { historyMatches: HistoryMatch[] }) {
             return (
               <div
                 className={
-                  "w-[12rem] h-[2.5rem] flex flex-row justify-between items-center text-xs font-semibold items-center text-center border-b border-gray-300" +
+                  "drop-shadow-xl shadow-2xl w-[12rem] h-[2.5rem] flex flex-row justify-between items-center text-xs font-semibold items-center text-center border-b border-gray-300" +
                   (club.eigenteam === "true" ? " bg-blue-100" : " bg-white")
                 }
                 key={club.clubrelatiecode}
@@ -55,47 +55,49 @@ function MatchView({ historyMatches }: { historyMatches: HistoryMatch[] }) {
           })}
         </div>
 
-        <div className="score-wrapper overflow-x-auto">
-          <div className="font-bold flex flex-row justify-between items-center text-center bg-blue-500 border-b-2 border-blue-400 text-xs text-white font-black italic font-roboto h-5">
-            <div className="w-[4rem]">G</div>
-            <div className="w-[4rem]">W</div>
-            <div className="w-[4rem]">G</div>
-            <div className="w-[4rem]">V</div>
-            <div className="w-[4rem]">Pts</div>
-            <div className="w-[4rem]">D</div>
-            <div className="w-[4rem]">+</div>
-            <div className="w-[4rem]">-</div>
-            <div className="w-[14rem]">Laatste 5</div>
-          </div>
+        <div className="overflow-x-auto flex">
+          <div>
+            <div className="font-bold flex flex-row justify-between items-center text-center bg-blue-500 border-b-2 border-blue-400 text-xs text-white font-black italic font-roboto h-5">
+              <div className="w-[2rem]">G</div>
+              <div className="w-[2rem]">W</div>
+              <div className="w-[2rem]">G</div>
+              <div className="w-[2rem]">V</div>
+              <div className="w-[2rem]">Pts</div>
+              <div className="w-[2rem]">D</div>
+              <div className="w-[2rem]">+</div>
+              <div className="w-[2rem]">-</div>
+              <div className="w-[8rem]">Laatste 5</div>
+            </div>
 
-          {clubList.map((club) => {
-            return (
-              <div
-                className={
-                  "h-[2.5rem] flex flex-row justify-between text-xs font-semibold items-center text-center border-b border-gray-300" +
-                  (club.eigenteam === "true" ? " bg-blue-100" : " bg-white")
-                }
-                key={club.clubrelatiecode}
-              >
-                <div className="w-[4rem] h-full bg-blue-100 text-semibold flex items-center justify-center">
-                  {club.gespeeldewedstrijden}
+            {clubList.map((club) => {
+              return (
+                <div
+                  className={
+                    "h-[2.5rem] flex flex-row justify-between text-xs font-semibold items-center text-center border-b border-gray-300" +
+                    (club.eigenteam === "true" ? " bg-blue-100" : " bg-white")
+                  }
+                  key={club.clubrelatiecode}
+                >
+                  <div className="w-[2rem] h-full bg-blue-100 text-semibold flex items-center justify-center">
+                    {club.gespeeldewedstrijden}
+                  </div>
+                  <div className="w-[2rem]">{club.gewonnen}</div>
+                  <div className="w-[2rem]">{club.gelijk}</div>
+                  <div className="w-[2rem]">{club.verloren}</div>
+                  <div className="w-[2rem]">{club.punten}</div>
+                  <div className="w-[2rem]">{club.doelsaldo}</div>
+                  <div className="w-[2rem]">{club.doelpuntenvoor}</div>
+                  <div className="w-[2rem]">{club.doelpuntentegen}</div>
+                  <div className="w-[8rem]">
+                    <ClubMatchHistory
+                      clubString={club.clubrelatiecode}
+                      historyMatches={historyMatches}
+                    />
+                  </div>
                 </div>
-                <div className="w-[4rem]">{club.gewonnen}</div>
-                <div className="w-[4rem]">{club.gelijk}</div>
-                <div className="w-[4rem]">{club.verloren}</div>
-                <div className="w-[4rem]">{club.punten}</div>
-                <div className="w-[4rem]">{club.doelsaldo}</div>
-                <div className="w-[4rem]">{club.doelpuntenvoor}</div>
-                <div className="w-[4rem]">{club.doelpuntentegen}</div>
-                <div className="w-[14rem]">
-                  <ClubMatchHistory
-                    clubString={club.clubrelatiecode}
-                    historyMatches={historyMatches}
-                  />
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </>
