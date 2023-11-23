@@ -146,11 +146,12 @@ function PlayerCard({
   return (
     <>
       <div className={"player-card" + cardClass()}>
-        <div className="card-content">
+        <div className="card-content ">
           <Tilt
             gyroscope={true}
+            tiltAngleXInitial={-2}
             tiltMaxAngleX={5}
-            tiltMaxAngleY={12}
+            tiltMaxAngleY={20}
             glareEnable={true}
             glareMaxOpacity={0.7}
             glareColor="#0f172a"
