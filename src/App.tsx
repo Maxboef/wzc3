@@ -123,6 +123,15 @@ function App() {
           />
           <Route path="/matches" element={matchList} />
 
+          <Route
+            path="/stand"
+            element={
+              <Standings
+                historyMatches={historyMatches?.length ? historyMatches : []}
+              />
+            }
+          />
+
           {user && allowedUser && allowedUser.allowed && (
             <Route
               path="/eigen-card"
