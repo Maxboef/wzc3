@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { auth, db } from "./firebase-auth";
 
 import { User, onAuthStateChanged } from "firebase/auth";
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet, NavLink } from "react-router-dom";
 
 import SignInButton from "./components/atoms/SignInButton";
 import SignOutButton from "./components/atoms/SignOutButton";
@@ -12,6 +12,7 @@ import PlayerList from "./components/molecules/PlayerList";
 import Home from "./pages/Home";
 import Standings from "./pages/Standings";
 import PlayerStats from "./pages/PlayerStats";
+import HighlightSelf from "./pages/HighlightSelf";
 
 import "./App.css";
 import { Match } from "./types/Match";
@@ -85,6 +86,15 @@ function App() {
     return (
       <>
         <Header>
+          {user && allowedUser && allowedUser.linked_player_id && (
+            <NavLink
+              to="/eigen-card"
+              className="px-4 py-1 bg-blue-950 text-white rounded border border-slate-600 flex items-center cursor-pointer"
+            >
+              Eigen Card
+            </NavLink>
+          )}
+
           {user === null && <SignInButton />}
           {user && <SignOutButton />}
         </Header>
@@ -111,17 +121,14 @@ function App() {
               />
             }
           />
-
           <Route path="/matches" element={matchList} />
 
-          <Route
-            path="/stand"
-            element={
-              <Standings
-                historyMatches={historyMatches?.length ? historyMatches : []}
-              />
-            }
-          />
+          {user && allowedUser && allowedUser.allowed && (
+            <Route
+              path="/eigen-card"
+              element={<HighlightSelf allowedUser={allowedUser} />}
+            />
+          )}
 
           {user && allowedUser && allowedUser.allowed && (
             <Route
@@ -129,11 +136,9 @@ function App() {
               element={<PlayerList allowedUser={allowedUser} />}
             />
           )}
-
           {user && allowedUser && allowedUser.is_admin && (
             <Route path="stats" element={<PlayerStats />} />
           )}
-
           <Route
             path="*"
             element={

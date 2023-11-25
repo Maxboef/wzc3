@@ -48,18 +48,19 @@ function PlayerStats() {
   // const StorePlayer = async () => {
   //   // ignore this function
   //   const obj = {
-  //     name: "Niek",
+  //     name: "",
   //     cardType: "bronze",
-  //     def: 41,
-  //     dri: 50,
-  //     pac: 41,
-  //     pas: 52,
-  //     phy: 52,
-  //     sho: 69,
-  //     position: "CS",
+  //     def: 54,
+  //     dri: 43,
+  //     pac: 57,
+  //     pas: 47,
+  //     phy: 60,
+  //     sho: 44,
+  //     position: "RW",
   //     weak: 2,
-  //     skill: 5,
+  //     skill: 2,
   //     image: "",
+  //     exp: 0,
   //   };
 
   //   await addDoc(collection(db, "players"), obj);

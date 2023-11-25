@@ -152,7 +152,7 @@ function PlayerCard({
             tiltMaxAngleX={5}
             tiltMaxAngleY={20}
             glareEnable={true}
-            glareMaxOpacity={0.7}
+            glareMaxOpacity={0.6}
             glareColor="#0f172a"
             glarePosition="all"
           >
