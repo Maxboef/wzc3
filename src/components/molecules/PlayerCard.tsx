@@ -2,6 +2,8 @@ import { Player } from "../../types/Player";
 import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 
+import injuryIcon from "./../../assets/injury.png";
+
 import bronzeCard from "./../../assets/cards/bronze.webp";
 import silverCard from "./../../assets/cards/silver.webp";
 import goldCard from "./../../assets/cards/gold.webp";
@@ -166,6 +168,12 @@ function PlayerCard({
             <div className="player-position" ref={positionRef}>
               {player.position}
             </div>
+
+            {player.has_injury && (
+              <div className="injury">
+                {<img src={injuryIcon} alt="Injury" width={28} />}
+              </div>
+            )}
 
             <div className="player-name" ref={nameRef}>
               {player.name}

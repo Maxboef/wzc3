@@ -14,4 +14,5 @@ export declare interface Player {
   cardType: string;
   inform: boolean;
   exp: number;
+  has_injury: boolean;
 }

@@ -44,6 +44,7 @@ function Home({
         cardType: doc.data().cardType,
         inform: doc.data().inform,
         exp: doc.data().exp,
+        has_injury: doc.data().has_injury,
       };
 
       setHighlightPlayer(highlightPlayer);

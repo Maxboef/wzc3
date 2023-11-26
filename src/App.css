@@ -57,6 +57,21 @@ html {
         text-align: center;
     }
 
+    .injury {
+        position: absolute;
+        top: 30px;
+        right: 60px;
+        width: 45px;
+        height: 45px;
+        border-radius: 100%;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.95;
+        border: 2px solid #e60000;
+    }
+
     .player-name {
         position: absolute;
         font-family: 'Roboto', sans-serif;

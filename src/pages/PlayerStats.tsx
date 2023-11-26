@@ -33,6 +33,7 @@ function PlayerStats() {
         cardType: player.data().cardType,
         inform: player.data().inform,
         exp: player.data().exp,
+        has_injury: player.data().has_injury,
       };
 
       data.push(returnData);
