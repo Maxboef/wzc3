@@ -77,6 +77,19 @@ function PlayerStats() {
     await updateDoc(playerRef, {
       exp: player.exp + amount,
     });
+
+    setPlayers((players) => {
+      return players.map((p) => {
+        if (p.id === player.id) {
+          return {
+            ...p,
+            exp: p.exp + amount,
+          };
+        }
+
+        return p;
+      });
+    });
   };
 
   const allExp = () => {
@@ -92,7 +105,18 @@ function PlayerStats() {
       inform: !player.inform,
     });
 
-    player.inform = !player.inform;
+    setPlayers((players) => {
+      return players.map((p) => {
+        if (p.id === player.id) {
+          return {
+            ...p,
+            inform: !p.inform,
+          };
+        }
+
+        return p;
+      });
+    });
   };
 
   return (
