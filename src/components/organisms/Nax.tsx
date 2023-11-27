@@ -39,7 +39,7 @@ function Nav({
         <li className="me-2">
           <NavLink
             to="/players"
-            className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
+            className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:border-gray-400 group "
           >
             Players
           </NavLink>
@@ -49,7 +49,7 @@ function Nav({
           <li className="me-2">
             <NavLink
               to="/stats"
-              className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-400 group "
+              className="text-xs inline-flex items-center justify-center py-3 px-4 border-b-2 border-transparent hover:border-gray-400 group "
             >
               Stats
             </NavLink>

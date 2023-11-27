@@ -55,7 +55,21 @@ html {
         font-size: 28px;
         font-weight: 900;
         text-align: center;
-        z-index: 1;
+    }
+
+    .injury {
+        position: absolute;
+        top: 30px;
+        right: 60px;
+        width: 45px;
+        height: 45px;
+        border-radius: 100%;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.95;
+        border: 2px solid #e60000;
     }
 
     .player-name {

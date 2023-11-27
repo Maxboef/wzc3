@@ -2,6 +2,8 @@ import { Player } from "../../types/Player";
 import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 
+import injuryIcon from "./../../assets/injury.png";
+
 import bronzeCard from "./../../assets/cards/bronze.webp";
 import silverCard from "./../../assets/cards/silver.webp";
 import goldCard from "./../../assets/cards/gold.webp";
@@ -16,6 +18,8 @@ import star from "./../../assets/star.svg";
 
 import { AllowedUser } from "../../types/AllowedUser";
 import PlayerCardStats from "./PlayerCardStats";
+
+import Tilt from "react-parallax-tilt";
 
 function PlayerCard({
   player,
@@ -144,45 +148,63 @@ function PlayerCard({
   return (
     <>
       <div className={"player-card" + cardClass()}>
-        <figure className="background" ref={backgroundRef}>
-          <img src={cardPath()} alt="Bronze card" />
-        </figure>
+        <div className="card-content ">
+          <Tilt
+            gyroscope={true}
+            tiltMaxAngleX={5}
+            tiltMaxAngleY={20}
+            glareEnable={true}
+            glareMaxOpacity={0.6}
+            glareColor="#0f172a"
+            glarePosition="all"
+          >
+            <figure className="background" ref={backgroundRef}>
+              <img src={cardPath()} alt="Bronze card" />
+            </figure>
 
-        <div className="player-total" ref={totalRef}>
-          {totalScore}
-        </div>
-        <div className="player-position" ref={positionRef}>
-          {player.position}
-        </div>
+            <div className="player-total" ref={totalRef}>
+              {totalScore}
+            </div>
+            <div className="player-position" ref={positionRef}>
+              {player.position}
+            </div>
 
-        <div className="player-name" ref={nameRef}>
-          {player.name}
-        </div>
+            {player.has_injury && (
+              <div className="injury">
+                {<img src={injuryIcon} alt="Injury" width={28} />}
+              </div>
+            )}
 
-        <div className="player-image">
-          {player.image && (
-            <img src={player.image} alt={player.name} ref={imageRef} />
-          )}
-        </div>
+            <div className="player-name" ref={nameRef}>
+              {player.name}
+            </div>
 
-        <div className="extra-stats" ref={extraStatsRef} key="{player.id}">
-          <div className="stars">
-            <span className="label">Skill</span>
-            <span className="value">
-              {player.skill}
-              <img src={star} alt="Star" width={13} className="ml-1" />
-            </span>
-          </div>
-          <div className="stars">
-            <span className="label">Weak</span>
-            <span className="value">
-              {player.weak}
-              <img src={star} alt="Star" width={13} className="ml-1" />
-            </span>
-          </div>
-        </div>
+            <div className="player-image">
+              {player.image && (
+                <img src={player.image} alt={player.name} ref={imageRef} />
+              )}
+            </div>
 
-        <PlayerCardStats player={player} allowedUser={allowedUser} />
+            <div className="extra-stats" ref={extraStatsRef} key="{player.id}">
+              <div className="stars">
+                <span className="label">Skill</span>
+                <span className="value">
+                  {player.skill}
+                  <img src={star} alt="Star" width={13} className="ml-1" />
+                </span>
+              </div>
+              <div className="stars">
+                <span className="label">Weak</span>
+                <span className="value">
+                  {player.weak}
+                  <img src={star} alt="Star" width={13} className="ml-1" />
+                </span>
+              </div>
+            </div>
+
+            <PlayerCardStats player={player} allowedUser={allowedUser} />
+          </Tilt>
+        </div>
       </div>
 
       {autoShowDetails === false && (

@@ -7,8 +7,15 @@ import { Player } from "../types/Player";
 import PlayerCard from "../components/molecules/PlayerCard";
 import { Match } from "../types/Match";
 import MatchView from "../components/molecules/MatchView";
+import { HistoryMatch } from "../types/HistoryMatch";
 
-function Home({ upcommingMatch }: { upcommingMatch: Match | null }) {
+function Home({
+  upcommingMatch,
+  historyMatches,
+}: {
+  upcommingMatch: Match | null;
+  historyMatches: HistoryMatch[];
+}) {
   const [highlightPlayer, setHighlightPlayer] = useState<Player | null>(null);
 
   const informPlayers = query(
@@ -37,6 +44,7 @@ function Home({ upcommingMatch }: { upcommingMatch: Match | null }) {
         cardType: doc.data().cardType,
         inform: doc.data().inform,
         exp: doc.data().exp,
+        has_injury: doc.data().has_injury,
       };
 
       setHighlightPlayer(highlightPlayer);
@@ -54,7 +62,7 @@ function Home({ upcommingMatch }: { upcommingMatch: Match | null }) {
           <h2 className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-4xl	 mt-5">
             Next match
           </h2>
-          <MatchView match={upcommingMatch} />
+          <MatchView match={upcommingMatch} historyMatches={historyMatches} />
         </>
       )}
 

@@ -33,6 +33,7 @@ function PlayerStats() {
         cardType: player.data().cardType,
         inform: player.data().inform,
         exp: player.data().exp,
+        has_injury: player.data().has_injury,
       };
 
       data.push(returnData);
@@ -48,18 +49,19 @@ function PlayerStats() {
   // const StorePlayer = async () => {
   //   // ignore this function
   //   const obj = {
-  //     name: "Niek",
+  //     name: "",
   //     cardType: "bronze",
-  //     def: 41,
-  //     dri: 50,
-  //     pac: 41,
-  //     pas: 52,
-  //     phy: 52,
-  //     sho: 69,
-  //     position: "CS",
+  //     def: 54,
+  //     dri: 43,
+  //     pac: 57,
+  //     pas: 47,
+  //     phy: 60,
+  //     sho: 44,
+  //     position: "RW",
   //     weak: 2,
-  //     skill: 5,
+  //     skill: 2,
   //     image: "",
+  //     exp: 0,
   //   };
 
   //   await addDoc(collection(db, "players"), obj);
@@ -74,6 +76,19 @@ function PlayerStats() {
 
     await updateDoc(playerRef, {
       exp: player.exp + amount,
+    });
+
+    setPlayers((players) => {
+      return players.map((p) => {
+        if (p.id === player.id) {
+          return {
+            ...p,
+            exp: p.exp + amount,
+          };
+        }
+
+        return p;
+      });
     });
   };
 
@@ -90,7 +105,18 @@ function PlayerStats() {
       inform: !player.inform,
     });
 
-    player.inform = !player.inform;
+    setPlayers((players) => {
+      return players.map((p) => {
+        if (p.id === player.id) {
+          return {
+            ...p,
+            inform: !p.inform,
+          };
+        }
+
+        return p;
+      });
+    });
   };
 
   return (

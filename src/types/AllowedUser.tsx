@@ -6,4 +6,3 @@ export declare interface AllowedUser {
   requested_player_id: string;
   linked_player_id: string;
 }
-[];
