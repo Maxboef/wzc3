@@ -152,9 +152,9 @@ function PlayerCard({
           <Tilt
             gyroscope={true}
             tiltMaxAngleX={5}
-            tiltMaxAngleY={20}
+            tiltMaxAngleY={25}
             glareEnable={true}
-            glareMaxOpacity={0.6}
+            glareMaxOpacity={0.45}
             glareColor="#0f172a"
             glarePosition="all"
           >
