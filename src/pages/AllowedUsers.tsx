@@ -26,8 +26,6 @@ function AllowedUsers() {
       data.push(returnData);
     });
 
-    console.log(data);
-
     setAllowedUsers(data);
   };
 
@@ -40,18 +38,6 @@ function AllowedUsers() {
   const toggleAdminUser = async (allowedUser: AllowedUser) => {
     await updateDoc(doc(db, "allowed_users", allowedUser.id), {
       is_admin: !allowedUser.is_admin,
-    });
-  };
-
-  const linkUserToPlayer = async (allowedUser: AllowedUser) => {
-    await updateDoc(doc(db, "allowed_users", allowedUser.id), {
-      linked_player_id: allowedUser.requested_player_id,
-    });
-  };
-
-  const clearLinkedPlayer = async (allowedUser: AllowedUser) => {
-    await updateDoc(doc(db, "allowed_users", allowedUser.id), {
-      requested_player_id: "",
     });
   };
 
@@ -78,26 +64,6 @@ function AllowedUsers() {
                 onClick={() => toggleAllowUser(allowedUser)}
               >
                 Allow this user
-              </button>
-            )}
-          </div>
-          <div>
-            {allowedUser.requested_player_id && (
-              <button
-                className="inline px-4 py-1 bg-blue-950 text-white rounded"
-                onClick={() => linkUserToPlayer(allowedUser)}
-              >
-                Link
-              </button>
-            )}
-          </div>
-          <div>
-            {allowedUser.requested_player_id && (
-              <button
-                className="inline px-4 py-1 bg-blue-950 text-white rounded bg-green-500"
-                onClick={() => clearLinkedPlayer(allowedUser)}
-              >
-                Clear
               </button>
             )}
           </div>

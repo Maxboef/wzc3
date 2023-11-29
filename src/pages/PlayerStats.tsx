@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 
 import { db } from "../firebase-auth";
-import { getDocs, collection, updateDoc, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  updateDoc,
+  doc,
+  addDoc,
+} from "firebase/firestore";
 
 import { Player } from "../types/Player";
 import AllowedUsers from "./AllowedUsers";
@@ -51,17 +57,19 @@ function PlayerStats() {
   //   const obj = {
   //     name: "",
   //     cardType: "bronze",
-  //     def: 54,
-  //     dri: 43,
-  //     pac: 57,
-  //     pas: 47,
-  //     phy: 60,
-  //     sho: 44,
-  //     position: "RW",
+  //     def: 40,
+  //     dri: 63,
+  //     pac: 42,
+  //     pas: 58,
+  //     phy: 48,
+  //     sho: 54,
+  //     position: "CAM",
   //     weak: 2,
-  //     skill: 2,
+  //     skill: 4,
   //     image: "",
-  //     exp: 0,
+  //     exp: 2,
+  //     inform: false,
+  //     has_injury: false,
   //   };
 
   //   await addDoc(collection(db, "players"), obj);
