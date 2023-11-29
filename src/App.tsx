@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 import Standings from "./pages/Standings";
 import PlayerStats from "./pages/PlayerStats";
 import HighlightSelf from "./pages/HighlightSelf";
+import LineUp from "./pages/LineUp";
 
 import "./App.css";
 import { Match } from "./types/Match";
@@ -147,6 +148,9 @@ function App() {
           )}
           {user && allowedUser && allowedUser.is_admin && (
             <Route path="stats" element={<PlayerStats />} />
+          )}
+          {user && allowedUser && allowedUser.is_admin && (
+            <Route path="line-up" element={<LineUp />} />
           )}
           <Route
             path="*"

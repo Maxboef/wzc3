@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { db } from "../firebase-auth";
-import {
-  getDocs,
-  collection,
-  updateDoc,
-  doc,
-  addDoc,
-} from "firebase/firestore";
+import { getDocs, collection, updateDoc, doc } from "firebase/firestore";
 
 import { Player } from "../types/Player";
 import AllowedUsers from "./AllowedUsers";

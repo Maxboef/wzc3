@@ -34,6 +34,24 @@ html {
         color: #46390c;
     }
 
+    &.small {
+        width: 80px;
+        position: absolute;
+
+        .player-name {
+            font-size: 18px;
+            bottom: 14px;
+        }
+
+        .injury {
+            top: 0px;
+            right: 0px;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #e60000;
+        }
+    }
+
     .player-total {
         position: absolute;
         font-family: 'Roboto', sans-serif;
@@ -91,7 +109,7 @@ html {
         position: absolute;
         bottom: 36%;
         left: 55%;
-        width: 215px;
+        width: 56%;
         transform: translateX(-50%);
         filter: drop-shadow(1px 3px 3px black);
         
