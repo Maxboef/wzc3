@@ -1,5 +1,5 @@
 import { Player } from "../../types/Player";
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useState } from "react";
 import { gsap } from "gsap";
 
 import injuryIcon from "./../../assets/injury.png";
@@ -36,6 +36,12 @@ function PlayerCard({
   const extraStatsRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef<HTMLDivElement>(null);
   const totalRef = useRef<HTMLDivElement>(null);
+
+  const [cardPlayer, setCardPlayer] = useState<Player>(player);
+
+  function setNewCardPlayer(player: Player) {
+    setCardPlayer(player);
+  }
 
   useLayoutEffect(() => {
     animateStats();
@@ -92,12 +98,12 @@ function PlayerCard({
   };
 
   const totalScore = Math.round(
-    (player.pac +
-      player.sho +
-      player.pas +
-      player.dri +
-      player.def +
-      player.phy) /
+    (cardPlayer.pac +
+      cardPlayer.sho +
+      cardPlayer.pas +
+      cardPlayer.dri +
+      cardPlayer.def +
+      cardPlayer.phy) /
       6
   );
 
@@ -107,26 +113,26 @@ function PlayerCard({
     }
 
     if (totalScore < 60) {
-      return player.inform ? bronzeInformCard : bronzeCard;
+      return cardPlayer.inform ? bronzeInformCard : bronzeCard;
     }
 
     if (totalScore < 75) {
-      return player.inform ? silverInformCard : silverCard;
+      return cardPlayer.inform ? silverInformCard : silverCard;
     }
 
     if (totalScore >= 75) {
-      return player.inform ? goldInformCard : goldCard;
+      return cardPlayer.inform ? goldInformCard : goldCard;
     }
 
     return bronzeCard;
   };
 
   const cardClass = () => {
-    if (player.cardType === "legend") {
+    if (cardPlayer.cardType === "legend") {
       return " legend";
     }
 
-    if (player.inform === true) {
+    if (cardPlayer.inform === true) {
       return " inform";
     }
 
@@ -202,7 +208,11 @@ function PlayerCard({
               </div>
             </div>
 
-            <PlayerCardStats player={player} allowedUser={allowedUser} />
+            <PlayerCardStats
+              player={player}
+              allowedUser={allowedUser}
+              setNewCardPlayer={setNewCardPlayer}
+            />
           </Tilt>
         </div>
       </div>

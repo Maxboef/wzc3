@@ -1,5 +1,5 @@
 import { Player } from "../../types/Player";
-import { useRef, useLayoutEffect, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 
 import { AllowedUser } from "../../types/AllowedUser";
@@ -13,8 +13,10 @@ const statTypes = ["PAC", "SHO", "PAS", "DRI", "DEF", "PHY"];
 function PlayerCardStats({
   player,
   allowedUser,
+  setNewCardPlayer,
 }: {
   player: Player;
+  setNewCardPlayer: (player: Player) => void;
   allowedUser?: AllowedUser;
 }) {
   const statsRef = useRef<HTMLDivElement>(null);
@@ -22,9 +24,6 @@ function PlayerCardStats({
 
   useEffect(() => {
     setLocalPlayer(player);
-  }, [player]);
-
-  useLayoutEffect(() => {
     animateStats();
   }, [player]);
 
@@ -134,6 +133,7 @@ function PlayerCardStats({
     player.exp -= 1;
 
     setLocalPlayer({ ...player });
+    setNewCardPlayer(player);
 
     await updateDoc(doc(db, "players", player.id), { ...player });
   };
