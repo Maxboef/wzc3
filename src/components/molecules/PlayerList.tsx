@@ -28,7 +28,6 @@ function PlayerList({ allowedUser }: { allowedUser?: AllowedUser }) {
         phy: player.data().phy,
         position: player.data().position,
         sho: player.data().sho,
-        total: player.data().total,
         weak: player.data().weak,
         skill: player.data().skill,
         image: player.data().image,

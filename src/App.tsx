@@ -20,7 +20,7 @@ import { Match } from "./types/Match";
 import MatchView from "./components/molecules/MatchView";
 import { AllowedUser } from "./types/AllowedUser";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import Nav from "./components/organisms/Nax";
+import Nav from "./components/organisms/Nav";
 import { HistoryMatch } from "./types/HistoryMatch";
 
 function App() {
