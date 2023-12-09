@@ -44,6 +44,7 @@ function PlayerCard({
   }
 
   useLayoutEffect(() => {
+    setCardPlayer(player);
     animateStats();
   }, [player]);
 
@@ -160,7 +161,7 @@ function PlayerCard({
             tiltMaxAngleX={5}
             tiltMaxAngleY={25}
             glareEnable={true}
-            glareMaxOpacity={0.45}
+            glareMaxOpacity={0.3}
             glareColor="#0f172a"
             glarePosition="all"
           >
