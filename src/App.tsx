@@ -5,7 +5,6 @@ import { User, onAuthStateChanged } from "firebase/auth";
 import { Routes, Route, Outlet, NavLink } from "react-router-dom";
 
 import SignInButton from "./components/atoms/SignInButton";
-import SignOutButton from "./components/atoms/SignOutButton";
 
 import Header from "./components/organisms/Header";
 import PlayerList from "./components/molecules/PlayerList";
@@ -22,8 +21,10 @@ import { AllowedUser } from "./types/AllowedUser";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import Nav from "./components/organisms/Nav";
 import { HistoryMatch } from "./types/HistoryMatch";
+import LoadingIcon from "./components/atoms/LoadingIcon";
 
 function App() {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User | null>(null);
   const [upcommingMatches, setUpcommingMatches] = useState<Match[]>([]);
   const [allowedUser, setAllowedUser] = useState<AllowedUser | null>(null);
@@ -35,6 +36,7 @@ function App() {
   }, []);
 
   onAuthStateChanged(auth, (currentUser) => {
+    setIsLoading(false);
     setUser(currentUser);
     initAllowedUser();
   });
@@ -87,21 +89,24 @@ function App() {
     return (
       <>
         <Header>
-          {user && allowedUser && allowedUser.linked_player_id && (
-            <NavLink
-              to="/eigen-card"
-              className="px-4 py-1 bg-blue-950 text-white rounded border border-slate-600 flex items-center cursor-pointer"
-            >
-              Eigen Card
-            </NavLink>
-          )}
+          {isLoading && <LoadingIcon />}
 
-          {user === null && <SignInButton />}
-          {user && <SignOutButton />}
+          {!isLoading &&
+            user &&
+            allowedUser &&
+            allowedUser.linked_player_id && (
+              <NavLink
+                to="/eigen-card"
+                className="px-4 py-1 bg-blue-950 text-white rounded border border-slate-600 flex items-center cursor-pointer"
+              >
+                Eigen Card
+              </NavLink>
+            )}
+
+          {!isLoading && user === null && <SignInButton />}
         </Header>
 
         <Nav user={user} allowedUser={allowedUser} />
-
         <Outlet />
       </>
     );
