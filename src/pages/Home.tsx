@@ -9,6 +9,15 @@ import { Match } from "../types/Match";
 import MatchView from "../components/molecules/MatchView";
 import { HistoryMatch } from "../types/HistoryMatch";
 
+let highlightHeader = "Mooiste goal op training";
+if (
+  new Date().getDay() === 0 ||
+  new Date().getDay() === 1 ||
+  (new Date().getDay() === 6 && new Date().getHours() > 14)
+) {
+  highlightHeader = "Man of the match";
+}
+
 function Home({
   upcommingMatch,
   historyMatches,
@@ -69,7 +78,7 @@ function Home({
       {highlightPlayer !== null && (
         <>
           <h2 className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-2xl	 mt-5">
-            Mooiste goal op de training
+            {highlightHeader}
           </h2>
 
           <PlayerCard player={highlightPlayer} autoShowDetails={true} />
