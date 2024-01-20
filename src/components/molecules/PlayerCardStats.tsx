@@ -80,6 +80,29 @@ function PlayerCardStats({
     }
   };
 
+  const returnStatLabel = (stat: string) => {
+    if (player.position !== "GK") {
+      return stat;
+    } else {
+      switch (stat) {
+        case "PAC":
+          return "DIV";
+        case "SHO":
+          return "HAN";
+        case "PAS":
+          return "KIC";
+        case "DRI":
+          return "REF";
+        case "DEF":
+          return "SPD";
+        case "PHY":
+          return "POS";
+        default:
+          return 0;
+      }
+    }
+  };
+
   const requestPlayer = async () => {
     if (!allowedUser || localPlayer === undefined) {
       return;
@@ -143,7 +166,7 @@ function PlayerCardStats({
       {statTypes.map((stat) => (
         <>
           <div className="stat" key={"stat" + stat}>
-            <span className="label uppercase">{stat}</span>
+            <span className="label uppercase">{returnStatLabel(stat)}</span>
             <span className="value">{returnStat(stat)}</span>
           </div>
         </>

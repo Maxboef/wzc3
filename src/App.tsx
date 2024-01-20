@@ -52,7 +52,7 @@ function App() {
 
   async function getHistoryMatches() {
     const response = await fetch(
-      "https://data.sportlink.com/pouleuitslagen?aantaldagen=180&weekoffset=-10&poulecode=720229&eigenwedstrijden=NEE&sorteervolgorde=datum-omgekeerd&gebruiklokaleteamgegevens=NEE&client_id=bybEeY5S2Y"
+      "https://data.sportlink.com/pouleuitslagen?aantaldagen=270&weekoffset=-10&poulecode=720229&eigenwedstrijden=NEE&sorteervolgorde=datum-omgekeerd&gebruiklokaleteamgegevens=NEE&client_id=bybEeY5S2Y"
     );
     const data = await response.json();
 

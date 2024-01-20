@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 
 import { db } from "../firebase-auth";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  documentId,
+} from "firebase/firestore";
 
 import { Player } from "../types/Player";
 import PlayerCard from "../components/molecules/PlayerCard";
@@ -26,10 +32,20 @@ function Home({
   historyMatches: HistoryMatch[];
 }) {
   const [highlightPlayer, setHighlightPlayer] = useState<Player | null>(null);
+  const [newPlayers, setNewPlayers] = useState<Player[]>([]);
 
   const informPlayers = query(
     collection(db, "players"),
     where("inform", "==", true)
+  );
+
+  const newPlayersQuery = query(
+    collection(db, "players"),
+    where(documentId(), "in", [
+      "r9ef8kv6ZfpDCRyCdhzS",
+      "prHs1hZYRUIUpsvy3Q22",
+      "T0wO1rFMwDoXDBGZHDjV",
+    ])
   );
 
   const loadInformPlayer = async () => {
@@ -60,8 +76,40 @@ function Home({
     });
   };
 
+  const loadNewPlayers = async () => {
+    const querySnapshot = await getDocs(newPlayersQuery);
+
+    const newPlayers: Player[] = [];
+    // TODO ugly, but multiple inform players are not supported yet
+    querySnapshot.forEach((doc) => {
+      const newPlayer: Player = {
+        id: doc.id,
+        name: doc.data().name,
+        def: doc.data().def,
+        dri: doc.data().dri,
+        pac: doc.data().pac,
+        pas: doc.data().pas,
+        phy: doc.data().phy,
+        position: doc.data().position,
+        sho: doc.data().sho,
+        weak: doc.data().weak,
+        skill: doc.data().skill,
+        image: doc.data().image,
+        cardType: doc.data().cardType,
+        inform: doc.data().inform,
+        exp: doc.data().exp,
+        has_injury: doc.data().has_injury,
+      };
+
+      newPlayers.push(newPlayer);
+    });
+
+    setNewPlayers(newPlayers);
+  };
+
   useEffect(() => {
     loadInformPlayer();
+    loadNewPlayers();
   }, []);
 
   return (
@@ -82,6 +130,20 @@ function Home({
           </h2>
 
           <PlayerCard player={highlightPlayer} autoShowDetails={true} />
+        </>
+      )}
+
+      {newPlayers.length > 0 && (
+        <>
+          <h2 className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-2xl	 mt-5">
+            New packed cards
+          </h2>
+
+          {newPlayers.map((player) => (
+            <>
+              <PlayerCard player={player} autoShowDetails={true} />
+            </>
+          ))}
         </>
       )}
     </>
