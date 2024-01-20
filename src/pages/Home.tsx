@@ -123,16 +123,6 @@ function Home({
         </>
       )}
 
-      {highlightPlayer !== null && (
-        <>
-          <h2 className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-2xl	 mt-5">
-            {highlightHeader}
-          </h2>
-
-          <PlayerCard player={highlightPlayer} autoShowDetails={true} />
-        </>
-      )}
-
       {newPlayers.length > 0 && (
         <>
           <h2 className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-2xl	 mt-5">
@@ -144,6 +134,16 @@ function Home({
               <PlayerCard player={player} autoShowDetails={true} />
             </>
           ))}
+        </>
+      )}
+
+      {highlightPlayer !== null && (
+        <>
+          <h2 className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-2xl	 mt-5">
+            {highlightHeader}
+          </h2>
+
+          <PlayerCard player={highlightPlayer} autoShowDetails={true} />
         </>
       )}
     </>
