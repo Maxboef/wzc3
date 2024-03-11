@@ -41,11 +41,7 @@ function Home({
 
   const newPlayersQuery = query(
     collection(db, "players"),
-    where(documentId(), "in", [
-      "r9ef8kv6ZfpDCRyCdhzS",
-      "prHs1hZYRUIUpsvy3Q22",
-      "T0wO1rFMwDoXDBGZHDjV",
-    ])
+    where(documentId(), "in", ["Z2DqXrRttJ4oBuYmQTOb", "1P2w45g4McGecwHZxNAF"])
   );
 
   const loadInformPlayer = async () => {
@@ -123,6 +119,16 @@ function Home({
         </>
       )}
 
+      {highlightPlayer !== null && (
+        <>
+          <h2 className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-2xl	 mt-5">
+            {highlightHeader}
+          </h2>
+
+          <PlayerCard player={highlightPlayer} autoShowDetails={true} />
+        </>
+      )}
+
       {newPlayers.length > 0 && (
         <>
           <h2 className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-2xl	 mt-5">
@@ -134,16 +140,6 @@ function Home({
               <PlayerCard player={player} autoShowDetails={true} />
             </>
           ))}
-        </>
-      )}
-
-      {highlightPlayer !== null && (
-        <>
-          <h2 className="text-white tracking-tighter font-black italic uppercase font-roboto block text-center text-2xl	 mt-5">
-            {highlightHeader}
-          </h2>
-
-          <PlayerCard player={highlightPlayer} autoShowDetails={true} />
         </>
       )}
     </>
